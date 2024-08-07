@@ -1,0 +1,192 @@
+---
+title: "sentiment_static" 
+output: 
+  html_document:
+    theme:
+      version: 5
+      bootswatch: minty
+      primary: "#6CC3D4"
+---
+```{r setup, include=FALSE}
+remotes::install_github("quanteda/quanteda.sentiment", force=FALSE, quiet=TRUE)
+remotes::install_github("m-pilarski/klartext", force=FALSE, quiet=TRUE)
+
+library(tibble)
+library(dplyr)
+library(purrr)
+library(tidyr)
+library(stringi)
+library(gt)
+library(htmltools)
+
+knitr::opts_chunk$set(echo=FALSE)
+```
+
+## Datengrundlage
+
+Kundenrezensionen zur [Cafeteria Café JuWi](https://g.co/kgs/9fFX3Jw)
+
+```{r, echo=TRUE}
+review_data <- tribble(
+  ~stars, ~text,
+  3, "Günstige Studentenpreise, Qualität akzeptabel jedoch deutlich geringere Auswahl als an der Großen Mensa. Eignet sich für kurze Stops, zum Kaffeetrinken und 15 bis 20 minütige Mittagspausen.",
+  5, "Nettes Cafe, kann leider auch keine mäßigen Dozenten ausgleichen, ist aber auf jedenfall das sehenswerteste hier auf dem Geländer. Für's Studium dann doch besser an eine richtige Uni wie Bonn ;-) .",
+  1, "Saß über ne Stunde da und wurde nicht bedient. Würde ja 0 Sterne geben aber das geht leider nicht.",
+  3, "Mini Portionen, geschmacklich auch nichts besonderes, Mitarbeiter so mittel hilfreich, wenn man Fragen hat... Vegan gibts immerhin jetzt häufiger.",
+  5, "+++Nett, Auswahl gut, Bio und vegan vorhanden, top preis Leistung.\n\n- jedoch keine Coca Cola",
+)
+```
+
+
+## Wörterbuch-Basierte Sentimentanalyse
+
+[SentiWS - A Publicly Available German-language Resource for Sentiment Analysis](https://aclanthology.org/L10-1339/)
+
+```{r}
+sentiment_data <- 
+  fst::read_fst(here::here("data/sentiws_data.fst")) |> 
+  select(token = word, polarity_num = polarity) |> 
+  mutate(
+    token = stri_trans_tolower(token),
+    polarity_abs_interval = as.integer(
+      ggplot2::cut_number(abs(polarity_num), n=3)
+    ),
+    polarity_lab = factor(
+      x=sign(polarity_num) * polarity_abs_interval,
+      levels=-3:3,
+      labels=c(
+        "sen-neg-max", "sen-neg-med", "sen-neg-min", "sen-neu",
+        "sen-pos-min", "sen-pos-med", "sen-pos-max"
+      )
+    )
+  ) |> 
+  select(-polarity_abs_interval)
+  
+# sentiment_data <- 
+#   quanteda.sentiment::data_dictionary_sentiws |>
+#   quanteda.sentiment::data_dictionary_Rauh |>
+#   quanteda::as.list() |> 
+#   vctrs::vec_slice(c("negative", "positive")) |> 
+#   enframe(name="polarity_lab", value="token") |> 
+#   unnest_longer(token) |> 
+#   mutate(
+#     polarity_num = case_match(polarity_lab, "negative" ~ -1, "positive" ~ 1),
+#     token = stri_trans_tolower(token)
+#   )
+```
+
+
+```{r}
+review_sentiment_data <- review_data |> 
+  mutate(
+    tokens = text |> 
+      stri_split_boundaries(type="word") |> 
+      map(stri_subset_charclass, "[[:alnum:]]"),
+    .keep="none"
+  ) |> 
+  rowid_to_column(var="doc_id") |> 
+  unnest_longer(tokens, values_to="token_raw") |> 
+  mutate(token_prep = stri_trans_tolower(token_raw)) |> 
+  left_join(
+    sentiment_data, by=join_by(token_prep == token), 
+    relationship="many-to-one", multiple="any"
+  ) |> 
+  mutate(
+    polarity_lab = replace_na(
+      polarity_lab, factor("sen-neu", levels=levels(polarity_lab))
+    ),
+    polarity_num = replace_na(polarity_num, 0)
+  )
+
+review_sentiment_data |> 
+  summarize(
+    doc_text_html = stri_c(
+      stri_c("<span class='", polarity_lab, " bubble'>", token_raw, "</span>"),
+      collapse=""
+    ),
+    doc_words_total = length(token_raw),
+    doc_polarity_norm = sum(polarity_num) / doc_words_total,
+    .by=doc_id
+  ) |> 
+  select(-doc_id) |> 
+  gt() |> 
+  cols_label(
+    doc_text_html = "Text",
+    doc_words_total = "Wortanzahl",
+    doc_polarity_norm = "Sentimentwert"
+  ) |> 
+  text_transform(
+    locations=cells_body(columns=ends_with("_html")),
+    fn=function(.x){
+      .x |> map_chr(\(..x){
+        ..x |> 
+          klartext::str_convert_html() |>
+          html()
+      })
+    }
+  ) |> 
+  fmt_number(columns=doc_polarity_norm)
+```
+
+<p><b>Legende</b></p>
+<span class="sen-neg-max bubble">max. negativ</span>
+<span class="sen-neg-med bubble">med. negativ</span>
+<span class="sen-neg-min bubble">min. negativ</span>
+<span class="sen-neu bubble">neutral</span>
+<span class="sen-pos-min bubble">min. positiv</span>
+<span class="sen-pos-med bubble">med. positiv</span>
+<span class="sen-pos-max bubble">max. positiv</span>
+<br>
+
+## Transformer-Basierte Sentimentanalyse
+
+```{r}
+library(reticulate)
+library(zeallot)
+
+# reticulate::install_miniconda()
+
+if(!"germansentiment" %in% conda_list()$name){
+  conda_create("germansentiment")
+  use_condaenv("germansentiment")
+  py_install(c("germansentiment"), pip=TRUE)
+}else{
+  use_condaenv("germansentiment")
+}
+
+lib_germansentiment <- import("germansentiment")
+
+sentiment_model <- lib_germansentiment$SentimentModel()
+
+c(classes, probabilities) %<-% sentiment_model$predict_sentiment(
+  as.list(review_data$text), output_probabilities=TRUE
+)
+
+tibble(text=review_data$text, class=classes) |> 
+  bind_cols(
+    probabilities |> map_dfr(\(.x){
+      set_names(map_dbl(.x, 2), map_chr(.x, 1))
+    })
+  ) |> 
+  gt() |> 
+  fmt_number(columns=where(is.numeric))
+```
+
+```{css, echo=FALSE}
+.sen-pos-max{background: #009392;}
+.sen-pos-med{background: #39b185;}
+.sen-pos-min{background: #9ccb86;}
+.sen-neu{background: #ffffff;}
+.sen-neg-min{background: #eeb479;}
+.sen-neg-med{background: #e88471;}
+.sen-neg-max{background: #cf597e;}
+.bubble{
+    float: left;
+    padding: 1.5px;
+    border-radius: 3px;
+    color: #111111;
+    position: relative;
+    font-size: 15px;
+    line-height: 17px;
+}
+```
