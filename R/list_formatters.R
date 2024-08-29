@@ -80,24 +80,3 @@ format_en_toc <- function(.x){
     )
   )
 }
-
-format_fa_list(
-  list(
-    "fa-solid fa-check-square"="Das ist ein Test",
-    "fa-solid fa-spinner fa-pulse"="Das hier auch",
-    list(
-      "fa-solid fa-spinner fa-pulse"="Hier geht es weiter"
-    )
-  )
-)
-
-format_en_toc(
-  list(
-    "lexikon"="Lexikonbasierte Sentimentanalyse",
-    list(
-      "lexikon-berechnung"="Berechnung",
-      "lexikon-kritik"="Kritik"
-    ),
-    "item-1-2"="Machine-Learning-Basierte Sentiment&shy;analyse"
-  )
-)
