@@ -68,7 +68,8 @@ format_en_toc <- function(.x){
     htmltools::tags$nav(
       id="page-toc",
       htmltools::tags$strong(
-        class="d-block h6 my-2", "In&shy;halts&shy;ver&shy;zeich&shy;nis"
+        class="d-block h6 my-2", 
+        htmltools::HTML("In&shy;halts&shy;ver&shy;zeich&shy;nis")
       ),
       htmltools::tags$hr(class="d-block my-2"),
       htmltools::HTML(rlist_c(
