@@ -1,19 +1,23 @@
 @for $i from 1 through 6 { h#{$i} { font-weight: bold; } }
 
-.p-just {
-  font-style: normal;
-  padding: 0;
-  margin-top: 0;
-  margin-left: 0 ;
-  margin-right: 0.5em ;
-  margin-bottom: 0;
-  text-indent: 1.5em;
-  text-align: justify;
+.content-sec{
+  margin-bottom: 1rem;
+  p {
+    padding: 0;
+    margin-top: 0;
+    margin-left: 0 ;
+    margin-right: 0.5em ;
+    margin-bottom: 0;
+    text-align: justify;
+    &:not(:first-of-type) {
+      text-indent: 1.5em;
+    }
+  }
+  word-break:break-word;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   -o-hyphens: auto;
-  word-break:break-word;
   hyphens: auto;
 }
 
