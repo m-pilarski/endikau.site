@@ -1,4 +1,4 @@
-.en-toc {
+.endikau-toc {
 
   @include media-breakpoint-up(md) {
     position: sticky;
@@ -38,14 +38,14 @@
       // border-radius: 0 !important;
 
       &:hover {
-        color: var(--en-toc-color);
-        border-left-color: var(--en-toc-color);
+        color: var(--endikau-toc-color);
+        border-left-color: var(--endikau-toc-color);
       }
 
       @include media-breakpoint-up(md) {
         &.active {
-          color: var(--en-toc-color);
-          border-left-color: var(--en-toc-color);
+          color: var(--endikau-toc-color);
+          border-left-color: var(--endikau-toc-color);
           font-weight: 500;
         }
       }

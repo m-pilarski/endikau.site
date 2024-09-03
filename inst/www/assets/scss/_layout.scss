@@ -1,20 +1,20 @@
 $enable-grid-classes: false;
 $enable-cssgrid: true;
 
-.en-sidebar {
+.endikau-sidebar {
   grid-area: sidebar;
 }
-.en-toc {
+.endikau-toc {
   grid-area: toc;
 }
-.en-content {
+.endikau-content {
   grid-area: content;
 }
-.en-intro {
+.endikau-intro {
   grid-area: intro;
 }
 
-.en-layout {
+.endikau-layout {
   display: grid;
   grid-template-areas:
     "intro"
