@@ -12,7 +12,7 @@ html_enable_twemoji <- function(){
       script="twemoji.min.js",
       all_files=TRUE
     ),
-    htmltools::tags$script("window.onload = function() { twemoji.parse(document.body, { base: 'lib/twemoji-15.1.0/', folder: 'svg', ext: '.svg' } ); }"),
+    htmltools::tags$script("window.onload = function() { twemoji.parse( document, { base: 'lib/twemoji-15.1.0/', folder: 'svg', ext: '.svg' } ); }"),
     htmltools::tags$style("img.emoji { cursor: pointer; height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em; }")
   )
 }

@@ -5,7 +5,7 @@ make_page <- function(){
   navbar <- list(
     tags$header(
       tags$nav(
-        class="navbar navbar-expand-sm py-0 align-middle fixed-top",
+        class="navbar navbar-expand-md py-0 align-middle fixed-top",
         id="page-navbar-container",
         tags$div(
           class="container-fluid",
@@ -13,7 +13,7 @@ make_page <- function(){
           tags$a(
             class="navbar-brand font-monoton", href="#", style="color: var(--bs-body-bg); font-size: 2rem;",
             "EnDiKaU"
-          ), 
+          ),
           tags$button(
             class="navbar-toggler",
             type="button",
@@ -28,7 +28,7 @@ make_page <- function(){
             class="collapse navbar-collapse",
             id="navbarSupportedContent",
             tags$ul(
-              class="navbar-nav me-auto mb-2 mb-sm-0",
+              class="navbar-nav me-auto mb-2 mb-md-0",
               tags$li(
                 class="nav-item",
                 tags$a(
@@ -90,34 +90,35 @@ make_page <- function(){
         htmltools::tags$div(
           class="container-xxl grid py-2",
           htmltools::tags$div(
-            class="g-col-3 text-end", style="font-size: 3rem;", "⚖️"
+            class="g-col-3 text-end", style="font-size: 3rem; filter: saturate(0) contrast(1.75);", "⚖️"
           ),
           htmltools::tags$div(
             class="g-col-6", 
             htmltools::tags$h1(
               class="font-source-serif-4", tags$strong("Sentimentanalyse")
             ),
-            "Hier steht etwas wichtiges…"
-          ),
-          htmltools::tags$div(class="g-col-3", "test 😬 test")
+            tags$strong("Automatisierte Erkennung von Stimmungen in Texten.")
+          )
         )
       ),
       htmltools::tags$section(
         htmltools::tags$div(
           class="container-xxl grid py-2",
-          htmltools::tags$div(class="g-col-3", "test 😬 test"),
+          htmltools::tags$div(class="g-col-12 g-col-md-3 order-md-1", "test 😬 IMG"),
+          htmltools::tags$div(class="g-col-12 g-col-md-3 order-md-3", "test 😬 TOC"),
           htmltools::tags$div(
-            class="g-col-6", 
+            class="g-col-12 g-col-md-6 order-md-2", 
             htmltools::tags$h3(class="font-source-serif-4", tags$strong("Einleitung")),
             !!!purrr::map(stringi::stri_rand_lipsum(1), tags$p),
             htmltools::tags$h3(class="font-source-serif-4", tags$strong("Hauptteil")),
             !!!purrr::map(stringi::stri_rand_lipsum(2), tags$p)
-          ),
-          htmltools::tags$div(class="g-col-2", "test 😬 test")
+          )
         )
       )
     )
   )
+  
+  # https://gridbyexample.com/video/series-auto-placement-order/
   
   fonts <- list(
     htmlDependency(
