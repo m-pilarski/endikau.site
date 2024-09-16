@@ -79,8 +79,10 @@ prep_fontawesome <- function(){
 }
 
 prep_bootstrap <- function(){
+  .here <- here::here()
+  stopifnot(stringi::stri_detect_regex(.here, "/endikau\\.site/?"))
   .dir_git <- fs::file_temp(pattern="git")
-  .dir_lib <- here::here("inst/www/assets/vendor/bootstrap/")
+  .dir_lib <- fs::path(.here, "inst/www/assets/vendor/bootstrap/")
   gert::git_clone("git@github.com:twbs/bootstrap.git", .dir_git)
   # 5.3.3 release
   gert::git_reset_hard(
@@ -101,7 +103,7 @@ prep_bootstrap <- function(){
   sass::sass(
     input=sass::as_sass(
       input=list(
-        "$body-bg: #dee0da;",
+        "$body-bg: #f5f7f1;",
         "$body-color: #1e1e24;",
         # Enable CSS Grid
         "$enable-grid-classes: false;",
