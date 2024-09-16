@@ -86,11 +86,11 @@ make_page <- function(){
   content <- list(
     htmltools::tags$body(
       htmltools::tags$section(
-        style="background: #b6b8b3;",
+        style="background: #e9ebe5;",
         htmltools::tags$div(
           class="container-xxl grid py-2",
           htmltools::tags$div(
-            class="g-col-3 text-end", style="font-size: 3rem;", "⚖️"
+            class="g-col-3 text-end", style="font-size: 3rem;", "🌡"
           ),
           htmltools::tags$div(
             class="g-col-6", 
@@ -103,6 +103,7 @@ make_page <- function(){
         )
       ),
       htmltools::tags$section(
+        style="background: #f5f7f1;",
         htmltools::tags$div(
           class="container-xxl grid py-2",
           htmltools::tags$div(class="g-col-3", "test 😬 test"),
