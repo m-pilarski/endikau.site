@@ -1,3 +1,15 @@
+#' Title
+#'
+#' @param .x 
+#' @param .fn_leaf_names 
+#' @param .fn_leaf_wrap 
+#' @param .fn_node_wrap 
+#'
+#' @return string
+#' @export
+#'
+#' @examples
+#' FALSE
 rlist_c <- function(
     .x, .fn_leaf_names=NULL, .fn_leaf_wrap=NULL, .fn_node_wrap=NULL
 ){
@@ -63,21 +75,30 @@ format_fa_list <- function(.x){
 #' @examples
 #' FALSE
 format_en_toc <- function(.x){
-  htmltools::tags$div(
-    id="page-toc-container", class="endikau-toc z-3",
-    htmltools::tags$nav(
-      id="page-toc",
-      htmltools::tags$strong(
-        class="d-block h6 my-2", 
-        htmltools::HTML("In&shy;halts&shy;ver&shy;zeich&shy;nis")
+  list(
+    htmltools::tags$div(
+      id="page-toc-container", class="endikau-toc z-3",
+      htmltools::tags$nav(
+        id="page-toc",
+        htmltools::tags$strong(
+          class="d-block h6 my-2", 
+          htmltools::HTML("In&shy;halts&shy;ver&shy;zeich&shy;nis")
+        ),
+        htmltools::tags$hr(class="d-block my-2"),
+        htmltools::HTML(rlist_c(
+          .x=.x,
+          .fn_leaf_names=\(.x, .n){
+            stringi::stri_c("<a href='#", .n, "'>", .x, "</a>")
+          }
+        ))
+      )
+    ),
+    htmltools::htmlDependency(
+      "adjustTOCHeight", version="0",
+      src=fs::path_package(
+        "endikau.site", "www", "assets", "js"
       ),
-      htmltools::tags$hr(class="d-block my-2"),
-      htmltools::HTML(rlist_c(
-        .x=.x,
-        .fn_leaf_names=\(.x, .n){
-          stringi::stri_c("<a href='#", .n, "'>", .x, "</a>")
-        }
-      ))
+      script="toc_height.js"
     )
   )
 }

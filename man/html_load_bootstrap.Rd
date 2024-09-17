@@ -4,7 +4,7 @@
 \alias{html_load_bootstrap}
 \title{Title}
 \usage{
-html_load_bootstrap()
+html_load_bootstrap(.var_override = list())
 }
 \value{
 list

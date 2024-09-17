@@ -19,7 +19,6 @@ make_page <- function(.navbar=make_navbar(), .main=make_main()){
           )
         ),
         el_main_sec(
-          htmltools::tags$div(class="g-col-12 g-col-xl-3 order-xl-1", "test 😬 IMG"),
           htmltools::tags$div(
             class="g-col-12 g-col-xl-3 order-xl-3", 
             format_en_toc(
@@ -38,15 +37,21 @@ make_page <- function(.navbar=make_navbar(), .main=make_main()){
             )
           ),
           htmltools::tags$div(
-            class="g-col-12 g-col-xl-6 order-xl-2 content-sec", 
-            htmltools::tags$h3(class="font-source-serif-4", htmltools::tags$strong("Einleitung")),
-            !!!purrr::map(stringi::stri_rand_lipsum(1), htmltools::tags$p),
-            word_cloud_element(),
-            htmltools::tags$h3(class="font-source-serif-4", htmltools::tags$strong("Hauptteil")),
-            !!!purrr::map(stringi::stri_rand_lipsum(5), htmltools::tags$p),
-            htmltools::tags$iframe(
-              height="600pt", width="100%", frameborder="no", id="myIframe", loading="lazy",
-              src="https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/"
+            class="g-col-12 g-col-xl-6 order-xl-2 g-start-xl-4", 
+            htmltools::tags$div(
+              class="content-sec",
+              htmltools::tags$h3("Einleitung"),
+              !!!purrr::map(stringi::stri_rand_lipsum(1), htmltools::tags$p),
+              word_cloud_element(),
+            ),
+            htmltools::tags$div(
+              class="content-sec",
+              htmltools::tags$h3("Hauptteil"),
+              !!!purrr::map(stringi::stri_rand_lipsum(5), htmltools::tags$p),
+              # htmltools::tags$iframe(
+              #   height="600pt", width="100%", frameborder="no", id="myIframe", loading="lazy",
+              #   src="https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/"
+              # )
             )
           )
         )

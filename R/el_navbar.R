@@ -8,7 +8,7 @@ el_navbar <- function(){
         class="container-fluid",
         style="color: var(--bs-body-bg); background: var(--bs-body-color);",
         htmltools::tags$a(
-          class="navbar-brand font-monoton", href="#", style="color: var(--bs-body-bg); font-size: 2rem;",
+          class="navbar-brand font-monoton", href="#", style="color: var(--bs-body-bg); font-size: 2.5rem;",
           "EnDiKaU"
         ),
         htmltools::tags$button(
