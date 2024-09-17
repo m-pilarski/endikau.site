@@ -1,5 +1,6 @@
+# TODO LOAD ALL DEPENDENCIES TOGETER TO AVOID REDUNDANT BOOTSTRAP
 
-make_page <- function(){
+make_page <- function(.navbar=make_navbar(), .main=make_main()){
 
   page <- htmltools::tags$html(
     htmltools::tags$meta(charset="utf-8"),
@@ -9,36 +10,70 @@ make_page <- function(){
         el_main_sec(
           .el_bg_color="#e9ebe5",
           htmltools::tags$div(
-            class="g-col-3 text-end", style="font-size: 3rem;", "🌡"
+            class="g-col-1 g-col-xl-3 text-end", style="font-size: 3rem;", "🌡"
           ),
           htmltools::tags$div(
-            class="g-col-6", 
-            htmltools::tags$h1(
-              class="font-source-serif-4", htmltools::tags$strong("Sentimentanalyse")
-            ),
-            htmltools::tags$strong("Automatisierte Erkennung von Stimmungen in Texten.")
+            class="g-col-11 g-col-xl-6", 
+            htmltools::tags$h1("Sentimentanalyse"),
+            "Automatisierte Erkennung von Stimmungen in Texten."
           )
         ),
         el_main_sec(
           htmltools::tags$div(class="g-col-12 g-col-xl-3 order-xl-1", "test 😬 IMG"),
           htmltools::tags$div(
             class="g-col-12 g-col-xl-3 order-xl-3", 
-            htmltools::tags$div("test 😬 TOC", style="position: sticky; top: 5rem;")
+            format_en_toc(
+              list(
+                "einleitung"="Einleitung",
+                "lexikon"="Lexikon&shy;basierte Sentiment&shy;analyse",
+                list(
+                  "lexikon-funktionsweise"="Funktions&shy;weise",
+                  "lexikon-kritik"="Kritik"
+                ),
+                "transformer"="Machine-Learning-Basierte Sentiment&shy;analyse",
+                list(
+                  "transformer-funktionsweise"="Funktions&shy;weise"
+                )
+              )
+            )
           ),
           htmltools::tags$div(
-            class="g-col-12 g-col-xl-6 order-xl-2", 
+            class="g-col-12 g-col-xl-6 order-xl-2 content-sec", 
             htmltools::tags$h3(class="font-source-serif-4", htmltools::tags$strong("Einleitung")),
             !!!purrr::map(stringi::stri_rand_lipsum(1), htmltools::tags$p),
+            word_cloud_element(),
             htmltools::tags$h3(class="font-source-serif-4", htmltools::tags$strong("Hauptteil")),
-            !!!purrr::map(stringi::stri_rand_lipsum(2), htmltools::tags$p)
+            !!!purrr::map(stringi::stri_rand_lipsum(5), htmltools::tags$p),
+            htmltools::tags$iframe(
+              height="600pt", width="100%", frameborder="no", id="myIframe", loading="lazy",
+              src="https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/"
+            )
           )
         )
       )
     ),
-    html_enable_fonts(),
-    html_enable_bootstrap(),
-    html_enable_twemoji(),
-    html_enable_fontawesome()
+    html_load_fonts(),
+    html_load_bootstrap(
+      .var_override=list(
+        # Colors
+        "$body-bg: #f5f7f1;",
+        "$body-color: #1e1e24;",
+        # Enable CSS Grid
+        "$enable-grid-classes: false;",
+        "$enable-cssgrid: true;"
+      )
+    ),
+    html_load_twemoji(),
+    html_load_fontawesome(),
+    html_load_custom_sass(
+      .sass=list(
+        sass::sass_file("inst/www/assets/vendor/bootstrap/scss/bootstrap.scss"),
+        sass::sass_file("inst/www/assets/vendor/bootstrap/scss/mixins/_breakpoints.scss"),
+        sass::sass_file("inst/www/assets/scss/_toc.scss"),
+        sass::sass_file("inst/www/assets/scss/_text-style.scss")
+      )
+    )#,
+    # html_load_custom_js()
   )
   
   temp_dir <- fs::file_temp(pattern="www")

@@ -64,7 +64,7 @@ format_fa_list <- function(.x){
 #' FALSE
 format_en_toc <- function(.x){
   htmltools::tags$div(
-    id="page-toc-container", class="endikau-toc text-body-secondary z-3",
+    id="page-toc-container", class="endikau-toc z-3",
     htmltools::tags$nav(
       id="page-toc",
       htmltools::tags$strong(

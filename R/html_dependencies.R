@@ -3,7 +3,7 @@
 #' @return list
 #'
 #' @examples
-html_enable_twemoji <- function(){
+html_load_twemoji <- function(){
   list(
     htmltools::htmlDependency(
       name="twemoji",
@@ -22,7 +22,7 @@ html_enable_twemoji <- function(){
 #' @return list
 #'
 #' @examples
-html_enable_fonts <- function(){
+html_load_fonts <- function(){
   list(
     # sass::font_google("Open Sans", local=TRUE)$html_deps(),
     # sass::font_google("Source Serif 4", local=TRUE)$html_deps(),
@@ -62,7 +62,25 @@ html_enable_fonts <- function(){
 #' @return list
 #'
 #' @examples
-html_enable_bootstrap <- function(){
+html_load_bootstrap <- function(.var_override = list()){
+  
+  .dir_tmp <- fs::dir_copy(
+    fs::path_package("endikau.site", "www", "assets", "vendor", "bootstrap"),
+    fs::dir_create(fs::file_temp("bootstrap"))
+  )
+  
+  fs::dir_create(fs::path(.dir_tmp, "css"))
+  
+  sass::sass(
+    input=sass::as_sass(
+      input=c(
+        .var_override,
+        sass::sass_file(fs::path(.dir_tmp, "scss", "bootstrap.scss"))
+      )
+    ),
+    output=fs::path(.dir_tmp, "css", "bootstrap.css")
+  )
+  
   list(
     htmltools::tags$meta(
       name="viewport", content="width=device-width, initial-scale=1"
@@ -70,9 +88,7 @@ html_enable_bootstrap <- function(){
     htmltools::htmlDependency(
       name="bootstrap",
       version="5.3.3",
-      src=fs::path_package(
-        "endikau.site", "www", "assets", "vendor", "bootstrap"
-      ),
+      src=.dir_tmp,
       stylesheet=fs::path("css", "bootstrap.css"),
       all_files=TRUE
     ),
@@ -82,7 +98,7 @@ html_enable_bootstrap <- function(){
   )
 }
 
-html_enable_fontawesome <- function(){
+html_load_fontawesome <- function(){
   list(
     htmltools::htmlDependency(
       name="fontawesome",
@@ -118,39 +134,30 @@ prep_fontawesome <- function(){
   )
 }
 
-prep_bootstrap <- function(){
-  .here <- here::here()
-  stopifnot(stringi::stri_detect_regex(.here, "/endikau\\.site/?"))
-  .dir_git <- fs::file_temp(pattern="git")
-  .dir_lib <- fs::path(.here, "inst/www/assets/vendor/bootstrap/")
-  gert::git_clone("git@github.com:twbs/bootstrap.git", .dir_git)
-  # 5.3.3 release
-  gert::git_reset_hard(
-    ref="6e1f75f420f68e1d52733b8e407fc7c3766c9dba", repo=I(.dir_git)
+html_load_custom_sass <- function(.sass=list()){
+  
+  if(length(.sass) == 0){return()}
+  
+  .dir_tmp <- fs::dir_create(fs::file_temp(pattern="sass"))
+  
+  sass::sass(input=.sass, output=fs::path(.dir_tmp, "custom.css"))
+  
+  htmltools::htmlDependency(
+    name="custom_sass", version="0", src=.dir_tmp, stylesheet="custom.css"
   )
-  if(fs::dir_exists(.dir_lib)){fs::dir_delete(.dir_lib)}
-  fs::dir_create(fs::path(.dir_lib, c("js", "scss", "css")))
-  fs::file_copy(
-    fs::path(.dir_git, "LICENSE"), fs::path(.dir_lib, "LICENSE")
-  )
-  fs::file_copy(
-    fs::path(.dir_git, "dist", "js", "bootstrap.bundle.js"),
-    fs::path(.dir_lib, "js", "bootstrap.bundle.js")
-  )
-  fs::dir_copy(
-    fs::path(.dir_git, "scss/"), .dir_lib
-  )
-  sass::sass(
-    input=sass::as_sass(
-      input=list(
-        "$body-bg: #f5f7f1;",
-        "$body-color: #1e1e24;",
-        # Enable CSS Grid
-        "$enable-grid-classes: false;",
-        "$enable-cssgrid: true;",
-        sass::sass_file(fs::path(.dir_lib, "scss", "bootstrap.scss"))
-      )
-    ),
-    output=fs::path(.dir_lib, "css", "bootstrap.css")
+  
+}
+
+html_load_fontawesome <- function(){
+  list(
+    htmltools::htmlDependency(
+      name="fontawesome",
+      version="6.6.0",
+      src=fs::path_package(
+        "endikau.site", "www", "assets", "vendor", "wordcloud2"
+      ),
+      script=c(fs::path("js", "wordcloud2.js")),
+      all_files=TRUE
+    )
   )
 }
