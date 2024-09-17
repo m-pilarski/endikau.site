@@ -70,6 +70,7 @@ make_page <- function(.navbar=make_navbar(), .main=make_main()){
     ),
     html_load_twemoji(),
     html_load_fontawesome(),
+    html_load_wordcloud2(),
     html_load_custom_sass(
       .sass=list(
         sass::sass_file("inst/www/assets/vendor/bootstrap/scss/bootstrap.scss"),

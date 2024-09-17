@@ -148,10 +148,10 @@ html_load_custom_sass <- function(.sass=list()){
   
 }
 
-html_load_fontawesome <- function(){
+html_load_wordcloud2 <- function(){
   list(
     htmltools::htmlDependency(
-      name="fontawesome",
+      name="wordcloud2",
       version="6.6.0",
       src=fs::path_package(
         "endikau.site", "www", "assets", "vendor", "wordcloud2"
