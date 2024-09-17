@@ -6,7 +6,7 @@ make_page <- function(.navbar=make_navbar(), .main=make_main()){
 
   page <- htmltools::tags$html(
     htmltools::tags$meta(charset="utf-8"),
-    htmltools::tags$head(htmltools::tags$title("EnDiKaU: Sentimentanalyse"))
+    htmltools::tags$head(htmltools::tags$title("EnDiKaU: Sentimentanalyse")),
     htmltools::tags$body(
       lang="de",
       el_navbar(),
