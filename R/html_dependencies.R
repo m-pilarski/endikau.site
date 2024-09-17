@@ -22,6 +22,46 @@ html_enable_twemoji <- function(){
 #' @return list
 #'
 #' @examples
+html_enable_fonts <- function(){
+  list(
+    # sass::font_google("Open Sans", local=TRUE)$html_deps(),
+    # sass::font_google("Source Serif 4", local=TRUE)$html_deps(),
+    # sass::font_google("Monoton", local=TRUE)$html_deps()
+    htmltools::htmlDependency(
+      name="font-opensans",
+      version="40",
+      src=fs::path_package(
+        "endikau.site", "www", "assets", "fonts", "open-sans"
+      ),
+      stylesheet=fs::path("font.css"),
+      all_files=TRUE
+    ),
+    htmltools::htmlDependency(
+      name="font-source-serif-4",
+      version="8",
+      src=fs::path_package(
+        "endikau.site", "www", "assets", "fonts", "source-serif-4"
+      ),
+      stylesheet=fs::path("font.css"),
+      all_files=TRUE
+    ),
+    htmltools::htmlDependency(
+      name="font-monoton",
+      version="19",
+      src=fs::path_package(
+        "endikau.site", "www", "assets", "fonts", "monoton"
+      ),
+      stylesheet=fs::path("font.css"),
+      all_files=TRUE
+    )
+  )
+}
+
+#' Title
+#'
+#' @return list
+#'
+#' @examples
 html_enable_bootstrap <- function(){
   list(
     htmltools::tags$meta(

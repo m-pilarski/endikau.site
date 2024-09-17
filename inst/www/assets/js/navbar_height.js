@@ -1,6 +1,6 @@
 function adjustNavbarSpacer() {
-    var Container = document.querySelector('#page-navbar-container');
-	var Spacer = document.querySelector('#page-navbar-spacer');
+    var Container = document.querySelector('#page-navbar');
+	  var Spacer = document.querySelector('#page-navbar-spacer');
     var Height = Container.scrollHeight;
     Spacer.style.height = Height + 'px';
 }
