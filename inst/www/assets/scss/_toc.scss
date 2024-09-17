@@ -1,6 +1,6 @@
 .endikau-toc {
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(xl) {
     position: sticky;
     // top: 0;
     top: 6rem;
@@ -42,7 +42,7 @@
         border-left-color: var(--endikau-toc-color);
       }
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(xl) {
         &.active {
           color: var(--endikau-toc-color);
           border-left-color: var(--endikau-toc-color);
