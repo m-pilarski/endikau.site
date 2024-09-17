@@ -1,10 +1,14 @@
-# TODO LOAD ALL DEPENDENCIES TOGETER TO AVOID REDUNDANT BOOTSTRAP
+# TODO: 
+# - LOAD ALL DEPENDENCIES TOGETER TO AVOID REDUNDANCY (e.g., BOOTSTRAP)
+# - MAKE PREP_GLOBAL_ASSET FUN SO THAT DEPENDENCIES ARE NOT NEEDED FOR EVERY SITE
 
 make_page <- function(.navbar=make_navbar(), .main=make_main()){
 
   page <- htmltools::tags$html(
     htmltools::tags$meta(charset="utf-8"),
+    htmltools::tags$head(htmltools::tags$title("EnDiKaU: Sentimentanalyse"))
     htmltools::tags$body(
+      lang="de",
       el_navbar(),
       el_main(
         el_main_sec(
