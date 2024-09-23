@@ -46,7 +46,17 @@ make_page <- function(.navbar=make_navbar(), .main=make_main()){
               class="content-sec",
               htmltools::tags$h3("Einleitung"),
               !!!purrr::map(stringi::stri_rand_lipsum(1), htmltools::tags$p),
-              word_cloud_element(),
+              htmltools::tags$div(
+                class="card",
+                htmltools::tags$div(
+                  class="card-header",
+                  "Wortwolke ☁️",
+                ),
+                htmltools::tags$div(
+                  class="card-body",
+                  word_cloud_element()
+                )
+              )
             ),
             htmltools::tags$div(
               class="content-sec",
@@ -59,7 +69,20 @@ make_page <- function(.navbar=make_navbar(), .main=make_main()){
             )
           )
         )
-      )
+      ),
+#       # https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_navbar_hide_scroll
+#       htmltools::HTML('<script> 
+# var prevScrollpos = window.pageYOffset;
+# window.onscroll = function() {
+# var currentScrollPos = window.pageYOffset;
+#   if (prevScrollpos > currentScrollPos) {
+#     document.getElementById("page-navbar-container").style.top = "0 !important";
+#   } else {
+#     document.getElementById("page-navbar-container").style.top = "-50px !important";
+#   }
+#   prevScrollpos = currentScrollPos;
+# }
+# </script>')
     ),
     html_load_fonts(),
     html_load_bootstrap(
