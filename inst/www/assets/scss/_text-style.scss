@@ -2,6 +2,10 @@
   background-color: #e9ebe5;
 }
 
+.main {
+  background-color: var(--bs-body-color);
+}
+
 // MOVE!
 .navbar-toggler:focus,
 .navbar-toggler:active,

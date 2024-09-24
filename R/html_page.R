@@ -53,6 +53,7 @@ make_page <- function(.navbar=el_navbar(), .main=el_main()){
             class="g-col-12 g-col-xl-6 order-xl-2 g-start-xl-4", 
             htmltools::tags$div(
               class="content-sec",
+              bslib::input_task_button(id="test", label="test"),
               htmltools::tags$h3("Einleitung"),
               !!!purrr::map(stringi::stri_rand_lipsum(1), htmltools::tags$p),
               htmltools::tags$div(
