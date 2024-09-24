@@ -18,6 +18,23 @@ html_load_twemoji <- function(){
   )
 }
 
+#' Title
+#'
+#' @return NULL
+#' @export
+#'
+#' @examples NULL
+html_load_jquery <- function(){
+  list(
+    htmltools::htmlDependency(
+      name="jquery",
+      version="3.7.1",
+      src=fs::path_package("endikau.site", "www", "assets", "vendor", "jquery"),
+      script=fs::path("js", "jquery.min.js"),
+      all_files=TRUE
+    )
+  )
+}
 
 #' Title
 #'

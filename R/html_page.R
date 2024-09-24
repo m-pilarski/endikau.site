@@ -75,9 +75,15 @@ make_page <- function(.navbar=el_navbar(), .main=el_main()){
                 htmltools::tags$div(
                   class="card-body",
                   htmltools::tags$iframe(
-                    src="https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/",
+                    id="iframe_sentidict",
+                    # src="https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/",
                     scrolling="no", style="width: 100%; height: 400pt; overflow: hidden;",
                     loading="lazy"
+                  ),
+                  htmltools::tags$script(
+                    "$(document).ready(function(){
+                      $('iframe#iframe_sentidict').attr('src', 'https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/');    
+                    });"
                   )
                 )
               )
@@ -108,6 +114,7 @@ make_page <- function(.navbar=el_navbar(), .main=el_main()){
       # }
       # </script>')
     ),
+    html_load_jquery(),
     html_load_fonts(),
     html_load_bootstrap(
       .var_override=list(
