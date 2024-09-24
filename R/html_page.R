@@ -12,7 +12,7 @@
 #'
 #' @examples NULL
 make_page <- function(.navbar=el_navbar(), .main=el_main()){
-
+  
   page <- htmltools::tags$html(
     htmltools::tags$meta(charset="utf-8"),
     htmltools::tags$head(htmltools::tags$title("EnDiKaU: Sentimentanalyse")),
@@ -75,7 +75,8 @@ make_page <- function(.navbar=el_navbar(), .main=el_main()){
                 htmltools::tags$div(
                   class="card-body",
                   htmltools::tags$iframe(
-                    src="https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/"
+                    src="https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/",
+                    scrolling="no", style="width: 100%; height: 400pt; overflow: hidden;"
                   )
                 )
               )
@@ -92,19 +93,19 @@ make_page <- function(.navbar=el_navbar(), .main=el_main()){
           )
         )
       ),
-#       # https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_navbar_hide_scroll
-#       htmltools::HTML('<script> 
-# var prevScrollpos = window.pageYOffset;
-# window.onscroll = function() {
-# var currentScrollPos = window.pageYOffset;
-#   if (prevScrollpos > currentScrollPos) {
-#     document.getElementById("page-navbar-container").style.top = "0 !important";
-#   } else {
-#     document.getElementById("page-navbar-container").style.top = "-50px !important";
-#   }
-#   prevScrollpos = currentScrollPos;
-# }
-# </script>')
+      #       # https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_navbar_hide_scroll
+      #       htmltools::HTML('<script> 
+      # var prevScrollpos = window.pageYOffset;
+      # window.onscroll = function() {
+      # var currentScrollPos = window.pageYOffset;
+      #   if (prevScrollpos > currentScrollPos) {
+      #     document.getElementById("page-navbar-container").style.top = "0 !important";
+      #   } else {
+      #     document.getElementById("page-navbar-container").style.top = "-50px !important";
+      #   }
+      #   prevScrollpos = currentScrollPos;
+      # }
+      # </script>')
     ),
     html_load_fonts(),
     html_load_bootstrap(
@@ -122,10 +123,11 @@ make_page <- function(.navbar=el_navbar(), .main=el_main()){
     html_load_wordcloud2(),
     html_load_custom_sass(
       .sass=list(
-        sass::sass_file("inst/www/assets/vendor/bootstrap/scss/bootstrap.scss"),
-        sass::sass_file("inst/www/assets/vendor/bootstrap/scss/mixins/_breakpoints.scss"),
-        sass::sass_file("inst/www/assets/scss/_toc.scss"),
-        sass::sass_file("inst/www/assets/scss/_text-style.scss")
+        sass::sass_file(fs::path_package("endikau.site", "www", "assets", "vendor", "bootstrap", "scss", "bootstrap.scss")),
+        sass::sass_file(fs::path_package("endikau.site", "www", "assets", "vendor", "bootstrap", "scss", "mixins", "_breakpoints.scss")),
+        sass::sass_file(fs::path_package("endikau.site", "www", "assets", "scss", "_toc.scss")),
+        sass::sass_file(fs::path_package("endikau.site", "www", "assets", "scss", "_text-style.scss")),
+        sass::sass_file(fs::path_package("endikau.site", "www", "assets", "scss", "_io.scss"))
       )
     )#,
     # html_load_custom_js()
@@ -136,7 +138,7 @@ make_page <- function(.navbar=el_navbar(), .main=el_main()){
   temp_dir <- fs::path_real(here::here("../endikau.shares/site"))
   htmltools::save_html(page, fs::path(temp_dir, "index.html"))
   rstudioapi::viewer(fs::path(temp_dir, "index.html"))
-
+  
 }
 
 if(interactive()){make_page()}

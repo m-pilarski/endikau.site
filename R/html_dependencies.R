@@ -9,7 +9,7 @@ html_load_twemoji <- function(){
       name="twemoji",
       version="15.1.0",
       src=fs::path_package("endikau.site", "www", "assets", "vendor", "twemoji"),
-      script="twemoji.min.js",
+      script=fs::path("js", "twemoji.min.js"),
       all_files=TRUE
     ),
     htmltools::tags$script("window.onload = function() { twemoji.parse( document, { base: 'lib/twemoji-15.1.0/', folder: 'svg', ext: '.svg' } ); }"),
@@ -119,34 +119,6 @@ html_load_fontawesome <- function(){
       script=c(fs::path("js", "all.min.js")),
       all_files=TRUE
     )
-  )
-}
-
-#' Title
-#'
-#' @return NULL
-#' @export
-#'
-#' @examples NULL
-prep_fontawesome <- function(){
-  .dir_git <- fs::file_temp(pattern="git")
-  .dir_lib <- here::here("inst/www/assets/vendor/fontawesome/")
-  gert::git_clone("git@github.com:FortAwesome/Font-Awesome.git", .dir_git)
-  # 6.6.0 release
-  gert::git_reset_hard(
-    ref="37eff7fa00de26db41183a3ad8ed0e9119fbc44b", repo=I(.dir_git)
-  )
-  if(fs::dir_exists(.dir_lib)){fs::dir_delete(.dir_lib)}
-  fs::dir_create(fs::path(.dir_lib, c("js", "svgs")))
-  fs::file_copy(
-    fs::path(.dir_git, "LICENSE.txt"), fs::path(.dir_lib, "LICENSE")
-  )
-  fs::file_copy(
-    fs::path(.dir_git, "js", "all.min.js"), 
-    fs::path(.dir_lib, "js", "all.min.js")
-  )
-  fs::dir_copy(
-    fs::path(.dir_git, "svgs/"), .dir_lib
   )
 }
 
