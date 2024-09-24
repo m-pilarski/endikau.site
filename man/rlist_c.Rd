@@ -2,25 +2,25 @@
 % Please edit documentation in R/list_formatters.R
 \name{rlist_c}
 \alias{rlist_c}
-\title{Title}
+\title{rlist_c}
 \usage{
 rlist_c(.x, .fn_leaf_names = NULL, .fn_leaf_wrap = NULL, .fn_node_wrap = NULL)
 }
 \arguments{
-\item{.x}{}
+\item{.x}{NULL}
 
-\item{.fn_leaf_names}{}
+\item{.fn_leaf_names}{NULL}
 
-\item{.fn_leaf_wrap}{}
+\item{.fn_leaf_wrap}{NULL}
 
-\item{.fn_node_wrap}{}
+\item{.fn_node_wrap}{NULL}
 }
 \value{
 string
 }
 \description{
-Title
+rlist_c
 }
 \examples{
-FALSE
+NULL
 }

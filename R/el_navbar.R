@@ -1,3 +1,9 @@
+#' Title
+#'
+#' @return NULL
+#' @export
+#'
+#' @examples NULL
 el_navbar <- function(){
   htmltools::tags$div(
     id="page-navbar-container",

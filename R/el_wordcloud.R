@@ -1,3 +1,9 @@
+#' Title
+#'
+#' @return NULL
+#' @export
+#'
+#' @examples NULL
 word_cloud_element <- function(){htmltools::tags$div(
   style="overflow-x: hidden;",
   htmltools::tags$canvas(id="word_cloud", class="word_cloud", width="700pt", height="200pt"),

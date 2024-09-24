@@ -1,15 +1,15 @@
-#' Title
+#' rlist_c
 #'
-#' @param .x 
-#' @param .fn_leaf_names 
-#' @param .fn_leaf_wrap 
-#' @param .fn_node_wrap 
+#' @param .x NULL
+#' @param .fn_leaf_names NULL
+#' @param .fn_leaf_wrap NULL
+#' @param .fn_node_wrap NULL
 #'
 #' @return string
 #' @export
 #'
 #' @examples
-#' FALSE
+#' NULL
 rlist_c <- function(
     .x, .fn_leaf_names=NULL, .fn_leaf_wrap=NULL, .fn_node_wrap=NULL
 ){

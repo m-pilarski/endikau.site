@@ -6,9 +6,12 @@
 \usage{
 html_load_bootstrap(.var_override = list())
 }
-\value{
-list
+\arguments{
+\item{.var_override}{NULL}
 }
 \description{
 Title
+}
+\examples{
+NULL
 }

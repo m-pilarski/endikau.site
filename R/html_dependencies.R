@@ -2,7 +2,7 @@
 #'
 #' @return list
 #'
-#' @examples
+#' @examples NULL
 html_load_twemoji <- function(){
   list(
     htmltools::htmlDependency(
@@ -21,7 +21,7 @@ html_load_twemoji <- function(){
 #'
 #' @return list
 #'
-#' @examples
+#' @examples NULL
 html_load_fonts <- function(){
   list(
     # sass::font_google("Open Sans", local=TRUE)$html_deps(),
@@ -57,11 +57,15 @@ html_load_fonts <- function(){
   )
 }
 
+
 #' Title
 #'
-#' @return list
+#' @param .var_override NULL
 #'
-#' @examples
+#' @return NULL
+#' @export
+#'
+#' @examples NULL
 html_load_bootstrap <- function(.var_override = list()){
   
   .dir_tmp <- fs::dir_copy(
@@ -98,6 +102,12 @@ html_load_bootstrap <- function(.var_override = list()){
   )
 }
 
+#' Title
+#'
+#' @return NULL
+#' @export
+#'
+#' @examples NULL
 html_load_fontawesome <- function(){
   list(
     htmltools::htmlDependency(
@@ -112,6 +122,12 @@ html_load_fontawesome <- function(){
   )
 }
 
+#' Title
+#'
+#' @return NULL
+#' @export
+#'
+#' @examples NULL
 prep_fontawesome <- function(){
   .dir_git <- fs::file_temp(pattern="git")
   .dir_lib <- here::here("inst/www/assets/vendor/fontawesome/")
@@ -134,6 +150,14 @@ prep_fontawesome <- function(){
   )
 }
 
+#' Title
+#'
+#' @param .sass NULL
+#'
+#' @return NULL
+#' @export
+#'
+#' @examples NULL
 html_load_custom_sass <- function(.sass=list()){
   
   if(length(.sass) == 0){return()}
@@ -148,6 +172,12 @@ html_load_custom_sass <- function(.sass=list()){
   
 }
 
+#' Title
+#'
+#' @return NULL
+#' @export
+#'
+#' @examples NULL
 html_load_wordcloud2 <- function(){
   list(
     htmltools::htmlDependency(

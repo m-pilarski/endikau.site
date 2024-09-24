@@ -10,8 +10,15 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
+    dplyr,
+    emoji,
     fs,
+    gert,
+    glue,
+    here,
     htmltools,
     purrr,
+    rstudioapi,
+    sass,
     stringi,
     vctrs
