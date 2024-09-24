@@ -8,7 +8,11 @@
     background-color: #e9ebe5;
     border-color: #cdcfca; /*set the color you want here*/
 }
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+.btn-primary:hover, 
+.btn-primary:focus, 
+.btn-primary:active, 
+.btn-primary.active, 
+.open > .dropdown-toggle.btn-primary {
     color: var(--bs-body-color);
     background-color: #cdcfca;
     border-color: #b1b3ae; /*set the color you want here*/
