@@ -1,6 +1,7 @@
 #' Title
 #'
-#' @return list
+#' @return NULL
+#' @export
 #'
 #' @examples NULL
 html_load_twemoji <- function(){
@@ -17,9 +18,11 @@ html_load_twemoji <- function(){
   )
 }
 
+
 #' Title
 #'
-#' @return list
+#' @return NULL
+#' @export
 #'
 #' @examples NULL
 html_load_fonts <- function(){

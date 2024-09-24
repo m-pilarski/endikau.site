@@ -6,9 +6,6 @@
 \usage{
 html_load_twemoji()
 }
-\value{
-list
-}
 \description{
 Title
 }

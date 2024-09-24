@@ -6,9 +6,6 @@
 \usage{
 html_load_fonts()
 }
-\value{
-list
-}
 \description{
 Title
 }

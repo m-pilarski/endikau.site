@@ -76,7 +76,8 @@ make_page <- function(.navbar=el_navbar(), .main=el_main()){
                   class="card-body",
                   htmltools::tags$iframe(
                     src="https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/",
-                    scrolling="no", style="width: 100%; height: 400pt; overflow: hidden;"
+                    scrolling="no", style="width: 100%; height: 400pt; overflow: hidden;",
+                    loading="lazy"
                   )
                 )
               )
