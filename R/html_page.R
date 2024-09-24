@@ -2,7 +2,16 @@
 # - LOAD ALL DEPENDENCIES TOGETER TO AVOID REDUNDANCY (e.g., BOOTSTRAP)
 # - MAKE PREP_GLOBAL_ASSET FUN SO THAT DEPENDENCIES ARE NOT NEEDED FOR EVERY SITE
 
-make_page <- function(.navbar=make_navbar(), .main=make_main()){
+#' Title
+#'
+#' @param .navbar NULL
+#' @param .main NULL
+#'
+#' @return NULL
+#' @export
+#'
+#' @examples NULL
+make_page <- function(.navbar=el_navbar(), .main=el_main()){
 
   page <- htmltools::tags$html(
     htmltools::tags$meta(charset="utf-8"),
@@ -14,7 +23,7 @@ make_page <- function(.navbar=make_navbar(), .main=make_main()){
         el_main_sec(
           .el_bg_color="#e9ebe5",
           htmltools::tags$div(
-            class="g-col-1 g-col-xl-3 text-end", style="font-size: 3rem;", "🌡"
+            class="g-col-1 g-col-xl-3 text-end", style="font-size: 3rem;", emoji::emoji("thermometer")
           ),
           htmltools::tags$div(
             class="g-col-11 g-col-xl-6", 
@@ -50,11 +59,24 @@ make_page <- function(.navbar=make_navbar(), .main=make_main()){
                 class="card",
                 htmltools::tags$div(
                   class="card-header",
-                  "Wortwolke ☁️",
+                  "Wortwolke", emoji::emoji("cloud")
                 ),
                 htmltools::tags$div(
                   class="card-body",
                   word_cloud_element()
+                )
+              ),
+              htmltools::tags$div(
+                class="card",
+                htmltools::tags$div(
+                  class="card-header",
+                  "Ausprobieren", emoji::emoji("bulb")
+                ),
+                htmltools::tags$div(
+                  class="card-body",
+                  htmltools::tags$iframe(
+                    src="https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/"
+                  )
                 )
               )
             ),
@@ -109,8 +131,9 @@ make_page <- function(.navbar=make_navbar(), .main=make_main()){
     # html_load_custom_js()
   )
   
-  temp_dir <- fs::file_temp(pattern="www")
-  fs::dir_create(temp_dir)
+  # temp_dir <- fs::file_temp(pattern="www")
+  # fs::dir_create(temp_dir)
+  temp_dir <- fs::path_real(here::here("../endikau.shares/site"))
   htmltools::save_html(page, fs::path(temp_dir, "index.html"))
   rstudioapi::viewer(fs::path(temp_dir, "index.html"))
 
