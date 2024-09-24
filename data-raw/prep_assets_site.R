@@ -1,13 +1,7 @@
 # htmltools::htmlDependency()
 
 htmltools::tags$html(
-  htmltools::tags$body(
-    htmltools::tags$head(
-      htmltools::tags$script("a")
-    ),
-    htmltools::tags$head(
-      htmltools::tags$script("b")
-    ),
-    "aaaaaaa"
-  )
+  htmltools::tags$meta(lang="a"),
+  htmltools::tags$meta(encoding="b"),
+  htmltools::tags$body("aaaaaaa")
 )
