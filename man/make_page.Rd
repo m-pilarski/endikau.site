@@ -4,12 +4,14 @@
 \alias{make_page}
 \title{Title}
 \usage{
-make_page(.navbar = el_navbar(), .main = el_main())
+make_page(.navbar = el_navbar(), .main = el_main(), .load_wordcloud2 = TRUE)
 }
 \arguments{
 \item{.navbar}{NULL}
 
 \item{.main}{NULL}
+
+\item{.load_wordcloud2}{NULL}
 }
 \description{
 Title
