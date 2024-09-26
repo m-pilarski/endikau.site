@@ -4,7 +4,13 @@
 \alias{nd_page}
 \title{nd_page}
 \usage{
-nd_page(.navbar = nd_navbar(), .main = el_main(), .load_wordcloud2 = TRUE)
+nd_page(
+  ...,
+  .page_type = "static",
+  .navbar = nd_navbar(),
+  .main = nd_main(),
+  .load_wordcloud2 = TRUE
+)
 }
 \arguments{
 \item{.navbar}{NULL}

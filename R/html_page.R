@@ -3,6 +3,14 @@
 # - MAKE PREP_GLOBAL_ASSET FUN SO THAT DEPENDENCIES ARE NOT NEEDED FOR EVERY SITE
 
 
+nd_card <- function(.header=list(), .body=list()){
+  tags$div(
+    class="card", 
+    tags$div(class="card-header", .header), 
+    tags$div(class="card-body", .body)
+  )
+}
+
 nd_iframe_app <- function(.url, .width="100%", .height="400pt"){
   .url_hash <- digest::digest(.url)
   .nd_iframe_app <- list(
@@ -41,7 +49,8 @@ nd_iframe_app <- function(.url, .width="100%", .height="400pt"){
 #'
 #' @examples NULL
 nd_page <- function(
-  .navbar=nd_navbar(), .main=el_main(), .load_wordcloud2=TRUE
+  ..., .page_type="static", .navbar=nd_navbar(), .main=nd_main(), 
+  .load_wordcloud2=TRUE
 ){
   
   page <- tags$html(
@@ -59,7 +68,13 @@ nd_page <- function(
       tags$script(src="assets/vendor/twemoji/js/twemoji.min.js"),
       tags$script(src="assets/vendor/bootstrap/js/bootstrap.bundle.js"),
       tags$script(src="assets/vendor/fontawesome/js/all.min.js"),
-      tags$script(src="assets/vendor/iframe-resizer/js/iframe-resizer.parent.js"),
+      if(.page_type == "static"){
+        tags$script(src="assets/vendor/iframe-resizer/js/iframe-resizer.parent.js")
+      }else if(.page_type == "app"){
+        tags$script(src="assets/vendor/iframe-resizer/js/iframe-resizer.child.js")
+      },
+      tags$script("window.onload = function() { twemoji.parse( document, { base: 'assets/vendor/twemoji/', folder: 'svg', ext: '.svg' } ); }"),
+      tags$style("img.emoji { cursor: pointer; height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em; }"),
       if(.load_wordcloud2){
         tags$script(src="assets/vendor/wordcloud2/js/wordcloud2.js")
       },
@@ -72,32 +87,33 @@ nd_page <- function(
       lang="de",
       .navbar,
       .main
-    ),
-    tags$script("window.onload = function() { twemoji.parse( document, { base: 'assets/vendor/twemoji/', folder: 'svg', ext: '.svg' } ); }"),
-    tags$style("img.emoji { cursor: pointer; height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em; }")
+    )
   )
   
   # temp_dir <- fs::file_temp(pattern="www")
   # fs::dir_create(temp_dir)
-  temp_dir <- fs::path_real(here::here("../endikau.shares/site"))
-  htmltools::save_html(page, fs::path(temp_dir, "index.html"))
-  zip::unzip(
-    zipfile=fs::path_package("endikau.site", "www", "assets.zip"),
-    exdir=fs::path(temp_dir, "assets")
-  )
-  rstudioapi::viewer(fs::path(temp_dir, "index.html"))
+  # temp_dir <- fs::path_real(here::here("../endikau.shares/site"))
+  # htmltools::save_html(page, fs::path(temp_dir, "index.html"))
+  # zip::unzip(
+  #   zipfile=fs::path_package("endikau.site", "www", "assets.zip"),
+  #   exdir=fs::path(temp_dir, "assets")
+  # )
+  # rstudioapi::viewer(fs::path(temp_dir, "index.html"))
   
 }
 
 if(interactive()){
-  # devtools::install()
+  devtools::install()
+  devtools::unload()
+  library(endikau.site)
   endikau.site::nd_page(
+    .page_type="static",
     .navbar=nd_navbar(),
-    .main=el_main(
-      el_main_sec(
-        .el_bg_color="#e9ebe5",
+    .main=nd_main(
+      nd_main_sec(
+        .bg_color="#e9ebe5",
         tags$div(
-          class="g-col-1 g-col-xl-3 text-end", style="font-size: 3rem;", 
+          class="g-col-1 g-col-xl-3 text-end",  style="font-size: 3rem;", 
           emoji::emoji("thermometer")
         ),
         tags$div(
@@ -106,7 +122,7 @@ if(interactive()){
           "Automatisierte Erkennung von Stimmungen in Texten."
         )
       ),
-      el_main_sec(
+      nd_main_sec(
         tabindex="0",
         `data-bs-spy`="scroll",
         `data-bs-target`="#page-toc",
@@ -143,27 +159,13 @@ if(interactive()){
               tags$h4("Funktionsweise"),
               tags$p("Die lexikonbasierte Sentimentanalyse ist die traditionelle Form des Verfahrens, bei der vorab definierte Wörterlisten, sogenannte Sentimentlexika, verwendet werden, um die Stimmung eines Textes zu bestimmen. Diese Lexika enthalten Wörter, die mit positiven oder negativen Gefühlen assoziiert sind, oft mit einem entsprechenden Gewicht, das die Stärke des Ausdrucks angibt."),
               tags$p("Zur Bewertung werden die Wörter des Textes mit den Einträgen des Lexikons (bspw. SentiWS oder German Polarity Clues) abgeglichen. Die aggregierten Gewichte der Wörter aus dem Lexikon geben schließlich die Gesamtstimmung des Textes wieder."),
-              tags$div(
-                class="card",
-                tags$div(
-                  class="card-header",
-                  "Wortwolke", emoji::emoji("cloud")
-                ),
-                tags$div(
-                  class="card-body",
-                  word_cloud_element()
-                )
+              nd_card(
+                .header=list("Wortwolke", emoji::emoji("cloud")),
+                .body=list(word_cloud_element())
               ),
-              tags$div(
-                class="card",
-                tags$div(
-                  class="card-header",
-                  "Ausprobieren", emoji::emoji("bulb")
-                ),
-                tags$div(
-                  class="card-body",
-                  nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/")
-                )
+              nd_card(
+                .header=list("Ausprobieren", emoji::emoji("bulb")),
+                .body=list(nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/"))
               )
             ),
             tags$div(
@@ -180,22 +182,15 @@ if(interactive()){
               tags$h4("Funktionsweise"),
               tags$p("Im Gegensatz zu lexikonbasierten Ansätzen bieten vortrainierte Modelle, die auf allgemeinen Sprachmodellen wie BERT (Bidirectional Encoder Representations from Transformers) basieren, eine fortschrittliche Möglichkeit zur Sentimentanalyse. Diese Modelle lernen aus einer Vielzahl von Beispielen und liefern auch in unbekannten Domänen oder bei komplexen sprachlichen Strukturen, wie Sarkasmus, verlässlichere Ergebnisse. Sie sind nicht auf spezifische Lexika angewiesen und können durch Fine-Tuning flexibel an unterschiedliche Anwendungsfälle angepasst werden, was sie besonders leistungsstark und vielseitig macht.")
             ),
-            tags$div(
-              class="card",
-              tags$div(
-                class="card-header",
-                "Ausprobieren", emoji::emoji("bulb")
-              ),
-              tags$div(
-                class="card-body",
-                nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict")
-              )
+            nd_card(
+              .header=list("Ausprobieren", emoji::emoji("bulb")),
+              .body=list(nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict"))
             )
           )
         )
       ),
-      el_main_sec(
-        .el_bg_color="#e9ebe5",
+      nd_main_sec(
+        .bg_color="#e9ebe5",
         tags$div(
           class="g-col-12", 
           tags$img(src="assets/img/JLU_Giessen-Logo-1.svg", width="200px"),
@@ -205,4 +200,12 @@ if(interactive()){
       )
     )
   )
+  
+  site_dir <- fs::path_real(here::here("../endikau.shares/site"))
+  htmltools::save_html(page, fs::path(site_dir, "index.html"))
+  zip::unzip(
+    zipfile=fs::path_package("endikau.site", "www", "assets.zip"),
+    exdir=fs::path(site_dir, "assets")
+  )
+  rstudioapi::viewer(fs::path(site_dir, "index.html"))
 }
