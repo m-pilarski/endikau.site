@@ -11849,6 +11849,10 @@ img.emoji {
   font-size: 2.5rem;
 }
 
+#page-navbar .navbar-brand:hover {
+  text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
+}
+
 #page-navbar .navbar-toggler {
   color: var(--nd-navbar-color);
   border: none;
