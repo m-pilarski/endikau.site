@@ -104,9 +104,9 @@ nd_page <- function(
 
 if(interactive()){
   devtools::install()
-  devtools::unload()
+  try({devtools::unload()})
   library(endikau.site)
-  endikau.site::nd_page(
+  site_html <- endikau.site::nd_page(
     .page_type="static",
     .navbar=nd_navbar(),
     .main=nd_main(
@@ -202,7 +202,7 @@ if(interactive()){
   )
   
   site_dir <- fs::path_real(here::here("../endikau.shares/site"))
-  htmltools::save_html(page, fs::path(site_dir, "index.html"))
+  htmltools::save_html(site_html, fs::path(site_dir, "index.html"))
   zip::unzip(
     zipfile=fs::path_package("endikau.site", "www", "assets.zip"),
     exdir=fs::path(site_dir, "assets")
