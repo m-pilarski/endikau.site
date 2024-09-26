@@ -3,3 +3,4 @@
 ^LICENSE\.md$
 ^.git
 ^data-raw$
+^inst/www/assets/

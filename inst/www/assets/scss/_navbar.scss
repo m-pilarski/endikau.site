@@ -1,0 +1,39 @@
+#page-navbar {
+	
+	background: var(--nd-navbar-bg);
+	
+	.navbar-brand {
+		color: var(--nd-navbar-color); 
+		font-family: "Monoton";
+		font-size: 2.5rem;
+	}
+	
+	.navbar-toggler {
+		color: var(--nd-navbar-color);
+		border: none;
+	}
+	
+	.nav-link {
+		border-radius: 5px;
+		color: var(--nd-navbar-color); 
+	}
+	
+	.dropdown-item {
+		&:hover {
+			background-color: lighten($nd-navbar-bg, 75%) !important;
+		}
+		&:active {
+			background-color: lighten($nd-navbar-bg, 50%) !important;
+		}
+	}
+	
+	.nav-link, .navbar-toggler {
+		&:hover, &:focus {
+			background-color: lighten($nd-navbar-bg, 25%) !important;
+		}
+		&:active {
+			background-color: lighten($nd-navbar-bg, 50%) !important;
+		}
+	}
+	
+}

@@ -65,7 +65,7 @@ format_fa_list <- function(.x){
   ))
 }
 
-#' format_en_toc
+#' format_nd_toc
 #'
 #' @param .x a named list
 #' 
@@ -74,17 +74,18 @@ format_fa_list <- function(.x){
 #'
 #' @examples
 #' FALSE
-format_en_toc <- function(.x){
+format_nd_toc <- function(.x){
   list(
-    htmltools::tags$div(
-      id="page-toc-container", class="endikau-toc z-3",
-      htmltools::tags$nav(
+    tags$div(
+      id="page-toc-container", 
+      class="nd-toc z-3",
+      tags$nav(
         id="page-toc",
-        htmltools::tags$strong(
-          class="d-block h6 my-2", 
+        tags$strong(
+          class="h6 my-2", 
           htmltools::HTML("In&shy;halts&shy;ver&shy;zeich&shy;nis")
         ),
-        htmltools::tags$hr(class="d-block my-2"),
+        tags$hr(class="d-block my-2"),
         htmltools::HTML(rlist_c(
           .x=.x,
           .fn_leaf_names=\(.x, .n){
@@ -93,12 +94,6 @@ format_en_toc <- function(.x){
         ))
       )
     ),
-    htmltools::htmlDependency(
-      "adjustTOCHeight", version="0",
-      src=fs::path_package(
-        "endikau.site", "www", "assets", "js"
-      ),
-      script="toc_height.js"
-    )
+    tags$div(id="page-toc-spacer", class="d-none d-xl-block")
   )
 }

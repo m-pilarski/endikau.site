@@ -1,10 +1,15 @@
 function adjustNavbarSpacer() {
-    var Container = document.querySelector('#page-navbar');
-	  var Spacer = document.querySelector('#page-navbar-spacer');
-    var Height = Container.scrollHeight;
-    Spacer.style.height = Height + 'px';
+	var navbarContainer = document.querySelector('#page-navbar');
+	var navbarSpacer = document.querySelector('#page-navbar-spacer');
+	var navbarHeight = navbarContainer.scrollHeight;
+	navbarSpacer.style.height = navbarHeight + 'px';
 }
-/* Run the function when the page loads */
+
 window.addEventListener('load', adjustNavbarSpacer);
-/* Run the function when the window is resized */
 window.addEventListener('resize', adjustNavbarSpacer);
+
+/*
+const navbarToggle = document.querySelector('#navbarSupportedContent') 
+navbarToggle.addEventListener('shown.bs.collapse', adjustNavbarSpacer) 
+navbarToggle.addEventListener('hidden.bs.collapse', adjustNavbarSpacer) 
+*/

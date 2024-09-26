@@ -1,23 +1,13 @@
-$endikau-gutter-x: 3rem;
+$nd-gutter-x: 3rem;
 
-$endikau-blue: #1e1e24;
-$endikau-blue-light: #6d8a96;
-$endikau-primary: #834ba0;
-$endikau-primary-light: #ad5fad;
-$endikau-primary-lighter: #ce78b3;
-$endikau-accent: #f2b9c4;
+$nd-navbar-color: #e9ebe5;
+$nd-navbar-bg: #2e2933;
 
 :root {
-  --endikau-blue: #{$endikau-blue};
-  --endikau-blue-light: #{$endikau-blue-light};
-  --endikau-primary: #{$endikau-primary};
-  --endikau-primary-light: #{$endikau-primary-light};
-  --endikau-primary-lighter: #{$endikau-primary-lighter};
-  --endikau-accent: #{$endikau-accent};
-  --endikau-toc-color: var(--endikau-blue);
-  --endikau-pre-bg: var(--bs-tertiary-bg);
-  --bs-btn-hover-color: red;
+	--nd-navbar-color: #{$nd-navbar-color};
+	--nd-navbar-bg: #{$nd-navbar-bg};
+  /* --endikau-pre-bg: var(--bs-tertiary-bg); */
 }
 
-// #f9ddda,#f2b9c4,#e597b9,#ce78b3,#ad5fad,#834ba0,#573b88
-// #262F36, #907F9F, #C79E8E, #F9DBBD
+/* #f9ddda,#f2b9c4,#e597b9,#ce78b3,#ad5fad,#834ba0,#573b88 */
+/* #262F36, #907F9F, #C79E8E, #F9DBBD */
