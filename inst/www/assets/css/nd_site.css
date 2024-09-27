@@ -11918,6 +11918,37 @@ img.emoji {
   border-color: var(--endikau-blue-light);
 }
 
+.vertical-input-group .input-group:first-child {
+  padding-bottom: 0;
+}
+
+.vertical-input-group .input-group:first-child * {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.vertical-input-group .input-group:last-child {
+  padding-top: 0;
+}
+
+.vertical-input-group .input-group:last-child * {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.vertical-input-group .input-group:not(:last-child):not(:first-child) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.vertical-input-group .input-group:not(:last-child):not(:first-child) * {
+  border-radius: 0;
+}
+
+.vertical-input-group .input-group:not(:first-child) * {
+  border-top: 0;
+}
+
 .card-header {
   background-color: var(--nd-navbar-color) !important;
   border-bottom: var(--bs-card-border-width) solid var(--nd-navbar-color) !important;

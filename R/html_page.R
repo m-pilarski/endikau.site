@@ -7,12 +7,12 @@ nd_card <- function(.header=list(), .body=list()){
   tags$div(
     class="card", 
     tags$div(class="card-header", .header), 
-    tags$div(class="card-body", .body)
+    tags$div(class="card-body", .body, style="padding: 0;")
   )
 }
 
 nd_iframe_app <- function(.url, .width="100%", .height="400pt"){
-  .url_hash <- digest::digest(.url)
+  .url_hash <- digest::digest(.url, algo="crc32c")
   .nd_iframe_app <- list(
     tags$iframe(
       id=.url_hash, scrolling="no", loading="lazy",
@@ -66,7 +66,7 @@ nd_page <- function(
       tags$script(src="assets/js/toc_height.js"),
       tags$script(src="assets/vendor/jquery/js/jquery.min.js"),
       tags$script(src="assets/vendor/twemoji/js/twemoji.min.js"),
-      tags$script(src="assets/vendor/bootstrap/js/bootstrap.bundle.js"),
+      tags$script(src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"),
       tags$script(src="assets/vendor/fontawesome/js/all.min.js"),
       if(.page_type == "static"){
         tags$script(src="assets/vendor/iframe-resizer/js/iframe-resizer.parent.js")
@@ -84,7 +84,7 @@ nd_page <- function(
       # htmltools::HTML('<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">')
     ),
     tags$body(
-      lang="de",
+      lang="de", style="background-color: var(--nd-navbar-color);",
       .navbar,
       .main
     )
@@ -123,12 +123,13 @@ if(interactive()){
         )
       ),
       nd_main_sec(
+        .bg_color="#ffffff",
         tabindex="0",
         `data-bs-spy`="scroll",
         `data-bs-target`="#page-toc",
         `data-bs-smooth-scroll`="true",
         tags$div(
-          class="g-col-12 g-col-xl-3 order-xl-3", 
+          class="g-col-12 g-col-xl-3 order-xl-3",
           format_nd_toc(
             list(
               "einleitung"="Einleitung",
@@ -165,7 +166,7 @@ if(interactive()){
               ),
               nd_card(
                 .header=list("Ausprobieren", emoji::emoji("bulb")),
-                .body=list(nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict/"))
+                .body=list(nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/senti_dict/"))
               )
             ),
             tags$div(
@@ -184,7 +185,7 @@ if(interactive()){
             ),
             nd_card(
               .header=list("Ausprobieren", emoji::emoji("bulb")),
-              .body=list(nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/sentiment_dict"))
+              .body=list(nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/senti_trans/"))
             )
           )
         )
@@ -194,7 +195,7 @@ if(interactive()){
         tags$div(
           class="g-col-12", 
           tags$img(src="assets/img/JLU_Giessen-Logo-1.svg", width="200px"),
-          tags$img(src="assets/img/Hessen-Logo.svg", width="100px"),
+          tags$img(src="assets/img/Hessen-Logo-grau.svg", width="100px"),
           !!!purrr::map(stringi::stri_rand_lipsum(10), tags$p)
         )
       )

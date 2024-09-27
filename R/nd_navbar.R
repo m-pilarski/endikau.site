@@ -32,6 +32,15 @@ nd_navbar <- function(){
           htmltools::tags$ul(
             class="navbar-nav me-auto mb-2 mb-md-0",
             htmltools::tags$li(
+              class="nav-item",
+              htmltools::tags$a(
+                class="nav-link",
+                href="#",
+                role="button",
+                htmltools::tags$i(class="fa-solid fa-water"), "Grundlagen",
+              )
+            ),
+            htmltools::tags$li(
               class="nav-item dropdown",
               htmltools::tags$a(
                 class="nav-link dropdown-toggle",

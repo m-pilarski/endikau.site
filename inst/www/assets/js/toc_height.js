@@ -1,7 +1,10 @@
-function adjustTOCHeight() {
-    var tocContainer = document.querySelector('#page-toc-container');
-    var tocHeight = tocContainer.querySelector('#page-toc').scrollHeight;
-    tocContainer.style.height = tocHeight + 'px';
+var tocContainer = document.querySelector('#page-toc-container');
+var tocBody = tocContainer.querySelector('#page-toc');
+
+if (tocContainer != null && tocBody != null) {
+  function adjustTOCHeight() {
+    tocContainer.style.height = tocBody.scrollHeight + 'px';
+  }
+  window.addEventListener('load', adjustTOCHeight);
+  window.addEventListener('resize', adjustTOCHeight);
 }
-window.addEventListener('load', adjustTOCHeight);
-window.addEventListener('resize', adjustTOCHeight);

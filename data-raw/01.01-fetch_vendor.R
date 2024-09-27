@@ -132,8 +132,12 @@ local({
     fs::path(.path_lib_tmp, "LICENSE")
   )
   fs::file_copy(
-    fs::path(.path_git_tmp, "dist", "js", "bootstrap.bundle.js"),
-    fs::path(.path_lib_tmp, "js", "bootstrap.bundle.js")
+    fs::path(.path_git_tmp, "dist", "js", "bootstrap.bundle.min.js"),
+    fs::path(.path_lib_tmp, "js", "bootstrap.bundle.min.js")
+  )
+  fs::file_copy(
+    fs::path(.path_git_tmp, "dist", "js", "bootstrap.bundle.min.js.map"),
+    fs::path(.path_lib_tmp, "js", "bootstrap.bundle.min.js.map")
   )
   fs::dir_copy(
     fs::path(.path_git_tmp, "scss/"), 
