@@ -11849,8 +11849,10 @@ img.emoji {
   font-size: 2.5rem;
 }
 
-#page-navbar .navbar-brand:hover {
-  text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
+@media (hover: hover) {
+  #page-navbar .navbar-brand:hover {
+    text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
+  }
 }
 
 #page-navbar .navbar-toggler {
@@ -11863,15 +11865,22 @@ img.emoji {
   color: var(--nd-navbar-color);
 }
 
-#page-navbar .dropdown-item:hover {
-  background-color: #edebef !important;
+@media (hover: hover) {
+  #page-navbar .dropdown-item:hover {
+    background-color: #edebef !important;
+  }
+  #page-navbar .dropdown-item:active {
+    background-color: #aea5b6 !important;
+  }
 }
 
-#page-navbar .dropdown-item:active {
-  background-color: #aea5b6 !important;
+@media (hover: hover) {
+  #page-navbar .nav-link:hover, #page-navbar .navbar-toggler:hover {
+    background-color: #6e627a !important;
+  }
 }
 
-#page-navbar .nav-link:hover, #page-navbar .nav-link:focus, #page-navbar .navbar-toggler:hover, #page-navbar .navbar-toggler:focus {
+#page-navbar .nav-link:focus, #page-navbar .navbar-toggler:focus {
   background-color: #6e627a !important;
 }
 

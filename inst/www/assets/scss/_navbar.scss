@@ -6,8 +6,10 @@
 		color: var(--nd-navbar-color); 
 		font-family: "Monoton";
 		font-size: 2.5rem;
-		&:hover{
-		  text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
+		@media (hover: hover) {
+			&:hover{
+			  text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
+			}
 		}
 	}
 	
@@ -22,16 +24,23 @@
 	}
 	
 	.dropdown-item {
-		&:hover {
-			background-color: lighten($nd-navbar-bg, 75%) !important;
-		}
-		&:active {
-			background-color: lighten($nd-navbar-bg, 50%) !important;
+		@media (hover: hover) {
+			&:hover {
+				background-color: lighten($nd-navbar-bg, 75%) !important;
+			}
+			&:active {
+				background-color: lighten($nd-navbar-bg, 50%) !important;
+			}
 		}
 	}
 	
 	.nav-link, .navbar-toggler {
-		&:hover, &:focus {
+		@media (hover: hover) {
+			&:hover {
+				background-color: lighten($nd-navbar-bg, 25%) !important;
+			}
+		}
+		&:focus {
 			background-color: lighten($nd-navbar-bg, 25%) !important;
 		}
 		&:active {
