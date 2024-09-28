@@ -84,7 +84,12 @@ nd_page <- function(
       # htmltools::HTML('<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">')
     ),
     tags$body(
-      lang="de", style="background-color: var(--nd-navbar-color);",
+      lang="de", 
+      style=.page_type |> dplyr::case_match(
+        "static" ~ "background-color: var(--nd-navbar-color);",
+        "app" ~ "background-color: var(--bs-body-bg);",
+        .default=""
+      ),
       .navbar,
       .main
     )
@@ -103,7 +108,7 @@ if(interactive()){
       nd_main_sec(
         .bg_color="#e9ebe5",
         tags$div(
-          class="g-col-1 g-col-xl-3 text-end",  style="font-size: 3rem;", 
+          class="g-col-1 g-col-xl-3 text-end",  style="font-size: 3.75rem;", 
           emoji::emoji("thermometer")
         ),
         tags$div(
@@ -126,7 +131,8 @@ if(interactive()){
               "lexikon"="Lexikon&shy;basierte Sentiment&shy;analyse",
               list(
                 "lexikon-funktionsweise"="Funktions&shy;weise",
-                "lexikon-vor_nachteile"="Vor- und Nachteile"
+                "lexikon-vor_nachteile"="Vor- und Nachteile",
+                "lexikon-ausprobieren"="Ausprobieren"
               ),
               "transformer"="Machine-Learning-Basierte Sentiment&shy;analyse",
               list(
@@ -154,15 +160,21 @@ if(interactive()){
                 .header=list("Wortwolke", emoji::emoji("cloud")),
                 .body=list(word_cloud_element())
               ),
-              nd_card(
-                .header=list("Ausprobieren", emoji::emoji("bulb")),
-                .body=list(nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/senti_dict/"))
-              )
+              # nd_card(
+              #   .header=list("Ausprobieren", emoji::emoji("bulb")),
+              #   .body=list()
+              # )
             ),
             tags$div(
               id="lexikon-vor_nachteile", class="content-sec",
               tags$h4("Vor- und Nachteile"),
               tags$p("Die lexikonbasierte Sentimentanalyse ist aufgrund ihrer einfachen Implementierung und des geringen Bedarfs an Rechen- und Speicherkapazität besonders für kleine Unternehmen mit begrenzten Ressourcen attraktiv. Allerdings stößt sie in komplexen Szenarien schnell an ihre Grenzen, da sie Schwierigkeiten hat, den Kontext und die Mehrdeutigkeit von Wörtern korrekt zu erfassen. Eine Phrase wie „nicht schlecht“ kann beispielsweise fälschlicherweise als negativ interpretiert werden, obwohl sie im Kontext positiv gemeint ist."),
+            ),
+            tags$div(
+              id="lexikon-ausprobieren", class="content-sec",
+              tags$h4("Ausprobieren"),
+              tags$p(stringi::stri_rand_lipsum(1)),
+              nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/senti_dict/")
             )
           ),
           tags$div(

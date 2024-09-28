@@ -23,15 +23,6 @@ sass::sass(
   cache=NULL
 )
 
-sass::sass(
-  input=sass::sass_file(
-    fs::path("inst", "www", "assets", "scss", "nd_apps.scss")
-  ),
-  output=fs::path(path_css, "nd_apps.css"),
-  cache=NULL
-)
-
-
 if(fs::file_exists(path_assets_zip)){fs::file_delete(path_assets_zip)}
 zip::zip(
   zipfile=path_assets_zip, 
