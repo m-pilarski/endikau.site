@@ -166,7 +166,7 @@ word_cloud_element <- function(){tags$div(
           rotateRatio: 0.5,
           rotationSteps: 2,
           wait: 20,
-          // backgroundColor: '#f1f2f0',
+          backgroundColor: '#fefffc',
       });
 
       WordCloud(document.getElementById('word_cloud'), options);

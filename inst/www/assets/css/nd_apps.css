@@ -11644,42 +11644,40 @@ textarea.form-control-lg {
   background-color: var(--bs-body-color);
 }
 
-.navbar-toggler:focus,
-.navbar-toggler:active,
-.navbar-toggler-icon:focus {
-  outline: none;
-  box-shadow: none;
-  border: none;
-}
-
 h1, .h1 {
-  font-weight: 800;
+  font-weight: 700;
   font-family: "Source Serif 4";
+  color: var(--nd-navbar-bg);
 }
 
 h2, .h2 {
-  font-weight: 800;
+  font-weight: 700;
   font-family: "Source Serif 4";
+  color: var(--nd-navbar-bg);
 }
 
 h3, .h3 {
-  font-weight: 800;
+  font-weight: 700;
   font-family: "Source Serif 4";
+  color: var(--nd-navbar-bg);
 }
 
 h4, .h4 {
-  font-weight: 800;
+  font-weight: 700;
   font-family: "Source Serif 4";
+  color: var(--nd-navbar-bg);
 }
 
 h5, .h5 {
-  font-weight: 800;
+  font-weight: 700;
   font-family: "Source Serif 4";
+  color: var(--nd-navbar-bg);
 }
 
 h6, .h6 {
-  font-weight: 800;
+  font-weight: 700;
   font-family: "Source Serif 4";
+  color: var(--nd-navbar-bg);
 }
 
 .content-sec {
@@ -11841,6 +11839,11 @@ img.emoji {
 
 #page-navbar {
   background: var(--nd-navbar-bg);
+}
+
+#page-navbar .nav-item {
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
 }
 
 #page-navbar .navbar-brand {

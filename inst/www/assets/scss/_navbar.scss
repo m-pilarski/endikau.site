@@ -2,6 +2,11 @@
 	
 	background: var(--nd-navbar-bg);
 	
+	.nav-item { 
+    padding-left: ($spacer * .25) !important;
+    padding-right: ($spacer * .25) !important;
+	}
+	
 	.navbar-brand {
 		color: var(--nd-navbar-color); 
 		font-family: "Monoton";

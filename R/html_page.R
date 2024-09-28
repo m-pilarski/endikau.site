@@ -7,7 +7,7 @@ nd_card <- function(.header=list(), .body=list()){
   tags$div(
     class="card", 
     tags$div(class="card-header", .header), 
-    tags$div(class="card-body", .body, style="padding: 0;")
+    tags$div(class="card-body p-0", .body)
   )
 }
 
@@ -89,17 +89,7 @@ nd_page <- function(
       .main
     )
   )
-  
-  # temp_dir <- fs::file_temp(pattern="www")
-  # fs::dir_create(temp_dir)
-  # temp_dir <- fs::path_real(here::here("../endikau.shares/site"))
-  # htmltools::save_html(page, fs::path(temp_dir, "index.html"))
-  # zip::unzip(
-  #   zipfile=fs::path_package("endikau.site", "www", "assets.zip"),
-  #   exdir=fs::path(temp_dir, "assets")
-  # )
-  # rstudioapi::viewer(fs::path(temp_dir, "index.html"))
-  
+
 }
 
 if(interactive()){
@@ -119,11 +109,11 @@ if(interactive()){
         tags$div(
           class="g-col-11 g-col-xl-6", 
           tags$h1("Sentimentanalyse"),
-          "Automatisierte Erkennung von Stimmungen in Texten."
+          tags$span(class="lead", "Automatisierte Erkennung von Stimmungen in Texten")
         )
       ),
       nd_main_sec(
-        .bg_color="#ffffff",
+        .bg_color="var(--bs-body-bg)",
         tabindex="0",
         `data-bs-spy`="scroll",
         `data-bs-target`="#page-toc",
@@ -136,7 +126,7 @@ if(interactive()){
               "lexikon"="Lexikon&shy;basierte Sentiment&shy;analyse",
               list(
                 "lexikon-funktionsweise"="Funktions&shy;weise",
-                "lexikon-vor_nachteile"="Kritik"
+                "lexikon-vor_nachteile"="Vor- und Nachteile"
               ),
               "transformer"="Machine-Learning-Basierte Sentiment&shy;analyse",
               list(

@@ -5,6 +5,11 @@
 $enable-grid-classes: false;
 $enable-cssgrid: true;
 
+$font-family-base: "Open Sans", "Segoe UI", Roboto, "IBM Plex Sans", "Noto Sans", sans-serif;
+$font-size-base: 1rem;
+
+$body-bg: #fefffc;
+
 @import "../vendor/bootstrap/scss/bootstrap";
 
 @import "variables";

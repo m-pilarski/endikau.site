@@ -12,6 +12,8 @@ local({
   .font_spec_grid <- tibble::tribble(
     ~family, ~wght,
     "Open Sans", c((3:8) * 100), 
+    "Arimo", c((4:7) * 100),
+    "Roboto", c((1:9) * 100),
     "Source Serif 4", c((2:9) * 100), 
     "Monoton", c(400),
   )

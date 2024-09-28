@@ -1,13 +1,15 @@
-var navbarContainer = document.querySelector('#page-navbar');
-var navbarSpacer = document.querySelector('#page-navbar-spacer');
-
-if (navbarContainer != null && navbarSpacer != null) {
-  function adjustNavbarSpacer() {
-  	navbarSpacer.style.height = navbarContainer.scrollHeight + 'px';
+function adjustNavbarSpacer() {
+  var navbarContainer = document.querySelector('#page-navbar');
+  if (!!navbarContainer) {
+    var navbarSpacer = document.querySelector('#page-navbar-spacer');
+    if (!!navbarSpacer) {
+    	navbarSpacer.style.height = navbarContainer.scrollHeight + 'px';
+    }
   }
-  window.addEventListener('load', adjustNavbarSpacer);
-  window.addEventListener('resize', adjustNavbarSpacer);
 }
+
+window.addEventListener('load', adjustNavbarSpacer);
+window.addEventListener('resize', adjustNavbarSpacer);
 
 /*
 const navbarToggle = document.querySelector('#navbarSupportedContent') 
