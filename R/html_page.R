@@ -124,7 +124,7 @@ if(interactive()){
         `data-bs-target`="#page-toc",
         `data-bs-smooth-scroll`="true",
         tags$div(
-          class="g-col-12 g-col-xl-3 order-xl-3",
+          class="g-col-12 g-col-xl-3 order-xl-2",
           format_nd_toc(
             list(
               "einleitung"="Einleitung",
@@ -136,13 +136,14 @@ if(interactive()){
               ),
               "transformer"="Machine-Learning-Basierte Sentiment&shy;analyse",
               list(
-                "transformer-funktionsweise"="Funktions&shy;weise"
+                "transformer-funktionsweise"="Funktions&shy;weise",
+                "transformer-ausprobieren"="Ausprobieren"
               )
             )
           )
         ),
         tags$div(
-          class="g-col-12 g-col-xl-6 order-xl-2 g-start-xl-4", 
+          class="g-col-12 g-col-xl-6 g-start-xl-4 order-xl-1", 
           tags$div(
             class="content-sec", id="einleitung",
             tags$h3("Einleitung"),
@@ -156,19 +157,26 @@ if(interactive()){
               tags$h4("Funktionsweise"),
               tags$p("Die lexikonbasierte Sentimentanalyse ist die traditionelle Form des Verfahrens, bei der vorab definierte Wörterlisten, sogenannte Sentimentlexika, verwendet werden, um die Stimmung eines Textes zu bestimmen. Diese Lexika enthalten Wörter, die mit positiven oder negativen Gefühlen assoziiert sind, oft mit einem entsprechenden Gewicht, das die Stärke des Ausdrucks angibt."),
               tags$p("Zur Bewertung werden die Wörter des Textes mit den Einträgen des Lexikons (bspw. SentiWS oder German Polarity Clues) abgeglichen. Die aggregierten Gewichte der Wörter aus dem Lexikon geben schließlich die Gesamtstimmung des Textes wieder."),
-              nd_card(
-                .header=list("Wortwolke", emoji::emoji("cloud")),
-                .body=list(word_cloud_element())
-              ),
               # nd_card(
               #   .header=list("Ausprobieren", emoji::emoji("bulb")),
               #   .body=list()
               # )
             ),
             tags$div(
+              class="mb-4",
+              nd_card(
+                .header=list("Wortwolke", emoji::emoji("cloud")),
+                .body=list(word_cloud_element())
+              )
+            ),
+            tags$div(
               id="lexikon-vor_nachteile", class="content-sec",
               tags$h4("Vor- und Nachteile"),
-              tags$p("Die lexikonbasierte Sentimentanalyse ist aufgrund ihrer einfachen Implementierung und des geringen Bedarfs an Rechen- und Speicherkapazität besonders für kleine Unternehmen mit begrenzten Ressourcen attraktiv. Allerdings stößt sie in komplexen Szenarien schnell an ihre Grenzen, da sie Schwierigkeiten hat, den Kontext und die Mehrdeutigkeit von Wörtern korrekt zu erfassen. Eine Phrase wie „nicht schlecht“ kann beispielsweise fälschlicherweise als negativ interpretiert werden, obwohl sie im Kontext positiv gemeint ist."),
+              endikau.site::format_fa_list(list(
+                "fa-solid fa-thumbs-up text-primary" = "Die lexikonbasierte Sentimentanalyse ist aufgrund ihrer einfachen Implementierung und des geringen Bedarfs an Rechen- und Speicherkapazität besonders für kleine Unternehmen mit begrenzten Ressourcen attraktiv.",
+                "fa-solid fa-thumbs-down text-primary" = "Allerdings stößt sie in komplexen Szenarien schnell an ihre Grenzen, da sie Schwierigkeiten hat, den Kontext und die Mehrdeutigkeit von Wörtern korrekt zu erfassen. Eine Phrase wie „nicht schlecht“ kann beispielsweise fälschlicherweise als negativ interpretiert werden, obwohl sie im Kontext positiv gemeint ist."
+              )),
+              # tags$p("Die lexikonbasierte Sentimentanalyse ist aufgrund ihrer einfachen Implementierung und des geringen Bedarfs an Rechen- und Speicherkapazität besonders für kleine Unternehmen mit begrenzten Ressourcen attraktiv. Allerdings stößt sie in komplexen Szenarien schnell an ihre Grenzen, da sie Schwierigkeiten hat, den Kontext und die Mehrdeutigkeit von Wörtern korrekt zu erfassen. Eine Phrase wie „nicht schlecht“ kann beispielsweise fälschlicherweise als negativ interpretiert werden, obwohl sie im Kontext positiv gemeint ist."),
             ),
             tags$div(
               id="lexikon-ausprobieren", class="content-sec",
@@ -185,9 +193,11 @@ if(interactive()){
               tags$h4("Funktionsweise"),
               tags$p("Im Gegensatz zu lexikonbasierten Ansätzen bieten vortrainierte Modelle, die auf allgemeinen Sprachmodellen wie BERT (Bidirectional Encoder Representations from Transformers) basieren, eine fortschrittliche Möglichkeit zur Sentimentanalyse. Diese Modelle lernen aus einer Vielzahl von Beispielen und liefern auch in unbekannten Domänen oder bei komplexen sprachlichen Strukturen, wie Sarkasmus, verlässlichere Ergebnisse. Sie sind nicht auf spezifische Lexika angewiesen und können durch Fine-Tuning flexibel an unterschiedliche Anwendungsfälle angepasst werden, was sie besonders leistungsstark und vielseitig macht.")
             ),
-            nd_card(
-              .header=list("Ausprobieren", emoji::emoji("bulb")),
-              .body=list(nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/senti_trans/"))
+            tags$div(
+              id="transformer-ausprobieren", class="content-sec",
+              tags$h4("Ausprobieren"),
+              tags$p(stringi::stri_rand_lipsum(1)),
+              nd_iframe_app("https://shiny.dsjlu.wirtschaft.uni-giessen.de/senti_trans/")
             )
           )
         )
@@ -211,4 +221,5 @@ if(interactive()){
     exdir=fs::path(site_dir, "assets")
   )
   rstudioapi::viewer(fs::path(site_dir, "index.html"))
+  
 }

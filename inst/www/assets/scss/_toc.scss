@@ -39,15 +39,15 @@
       // border-radius: 0 !important;
 
       &:hover {
-        color: var(--endikau-toc-color);
-        border-left-color: var(--endikau-toc-color);
+        // color: var(--endikau-toc-color);
+        border-left-color: var(--bs-primary);
       }
 
       @include media-breakpoint-up(xl) {
         &.active {
-          color: var(--endikau-toc-color);
-          border-left-color: var(--endikau-toc-color);
-          font-weight: 500;
+          // color: var(--endikau-toc-color);
+          border-left-color: var(--bs-primary);
+          font-weight: 600;
         }
       }
 

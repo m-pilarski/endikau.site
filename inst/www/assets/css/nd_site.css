@@ -11826,15 +11826,13 @@ img.emoji {
 }
 
 .nd-toc nav a:hover {
-  color: var(--endikau-toc-color);
-  border-left-color: var(--endikau-toc-color);
+  border-left-color: var(--bs-primary);
 }
 
 @media (min-width: 1200px) {
   .nd-toc nav a.active {
-    color: var(--endikau-toc-color);
-    border-left-color: var(--endikau-toc-color);
-    font-weight: 500;
+    border-left-color: var(--bs-primary);
+    font-weight: 600;
   }
 }
 
@@ -11900,20 +11898,21 @@ img.emoji {
   font-size: var(--bs-body-font-size);
 }
 
+/*
 .btn-primary {
-  color: var(--bs-body-color) !important;
-  background-color: #e9ebe5 !important;
-  border-color: #cdcfca !important;
-  /*set the color you want here*/
-}
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:disabled {
-  color: var(--bs-body-color) !important;
-  background-color: #cdcfca !important;
-  border-color: #b1b3ae !important;
-  /*set the color you want here*/
+	color: var(--bs-body-color) !important;
+	background-color: #e9ebe5 !important;
+	border-color: #cdcfca !important; 
+	
+	&:hover, &:focus, &:active, &:disabled {
+		color: var(--bs-body-color) !important;
+		background-color: #cdcfca !important;
+		border-color: #b1b3ae !important; 
+	}
+	
 }
-
+*/
 .shiny-bound-input {
   font-size: var(--bs-body-font-size);
 }
@@ -11959,7 +11958,6 @@ img.emoji {
 
 .card-header {
   background-color: var(--nd-navbar-color) !important;
-  border-bottom: var(--bs-card-border-width) solid var(--nd-navbar-color) !important;
 }
 
 .card {

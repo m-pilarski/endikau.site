@@ -55,13 +55,18 @@ rlist_c <- function(
 #'
 #' @examples
 #' FALSE
-format_fa_list <- function(.x){
+format_fa_list <- function(.x, .pad_left="1.75em"){
   htmltools::HTML(rlist_c(
     .x,
     .fn_leaf_names=\(.x, .n){
       stringi::stri_c("<span class='fa-li'><i class='", .n, "'></i></span>", .x)
     },
-    .fn_node_wrap=\(.x){stringi::stri_c("<ul class='fa-ul'>", .x, "</ul>")},
+    .fn_node_wrap=\(.x){
+      stringi::stri_c(
+        "<ul class='fa-ul' style='margin-left: var(--fa-li-margin, ", 
+        .pad_left, ");'>", .x, "</ul>"
+      )
+    }
   ))
 }
 
