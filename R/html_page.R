@@ -108,7 +108,7 @@ if(interactive()){
       nd_main_sec(
         .bg_color="#e9ebe5",
         tags$div(
-          class="g-col-1 g-col-xl-3 text-end",  style="font-size: 3.75rem;", 
+          class="g-col-1 g-col-xl-3 text-end",  style="font-size: 3.75rem; font-family: serif !important;", 
           emoji::emoji("thermometer")
         ),
         tags$div(
@@ -166,7 +166,18 @@ if(interactive()){
               class="mb-4",
               nd_card(
                 .header=list("Wortwolke", emoji::emoji("cloud")),
-                .body=list(word_cloud_element())
+                .body=list(
+                  tags$div(
+                    style="overflow-x: hidden;",
+                    tags$canvas(id="wordcloud_canvas", width="700pt", height="300pt"),
+                    tags$script(src="assets/js/wordclouds.js"),
+                    tags$script(htmltools::HTML(
+                      "$(window).on('load resize', function() {",
+                      "  fetch('assets/data/wordcloud2_data.json').then((response) => response.json()).then((json) => { wordcloud_draw('wordcloud_canvas', json, 3); });",
+                      "} );"
+                    ))
+                  )
+                )
               )
             ),
             tags$div(
@@ -220,6 +231,6 @@ if(interactive()){
     zipfile=fs::path_package("endikau.site", "www", "assets.zip"),
     exdir=fs::path(site_dir, "assets")
   )
-  rstudioapi::viewer(fs::path(site_dir, "index.html"))
+  rstudioapi::viewer("https://endikau.dsjlu.wirtschaft.uni-giessen.de/")
   
 }

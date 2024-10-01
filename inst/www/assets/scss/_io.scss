@@ -1,24 +1,6 @@
 .btn{
-
   font-size: var(--bs-body-font-size);
-  
 }
-
-/*
-.btn-primary {
-
-	color: var(--bs-body-color) !important;
-	background-color: #e9ebe5 !important;
-	border-color: #cdcfca !important; 
-	
-	&:hover, &:focus, &:active, &:disabled {
-		color: var(--bs-body-color) !important;
-		background-color: #cdcfca !important;
-		border-color: #b1b3ae !important; 
-	}
-	
-}
-*/
 
 .shiny-bound-input {
 	font-size: var(--bs-body-font-size);
@@ -29,13 +11,10 @@
 }
 
 .form-select {
-  
 	&:focus {
 		border-color: var(--endikau-blue-light);
 	}
-  
 }
-
 
 .vertical-input-group {
   .input-group:first-child {
@@ -62,4 +41,9 @@
   .input-group:not(:first-child) * {
       border-top: 0;
   }
+}
+
+.accordion-button-primary {
+  @extend .accordion-button
+  
 }
