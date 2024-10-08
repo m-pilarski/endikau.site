@@ -46,12 +46,12 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="11.083333"
-     inkscape:cx="14.932331"
-     inkscape:cy="31.759399"
-     inkscape:window-width="1465"
-     inkscape:window-height="991"
-     inkscape:window-x="26"
-     inkscape:window-y="23"
+     inkscape:cx="14.887218"
+     inkscape:cy="31.714287"
+     inkscape:window-width="1468"
+     inkscape:window-height="973"
+     inkscape:window-x="35"
+     inkscape:window-y="32"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg5" />
   <path
@@ -68,7 +68,7 @@
      fill="#5DADEC"
      d="M24 16h4v19l-4-.046V16zM8 35l4-.046V16H8v19z"
      id="path3"
-     style="fill:#832643;fill-opacity:1" />
+     style="fill:#e9ebe5;fill-opacity:1" />
   <path
      fill="#664500"
      d="M14.999 18c-.15 0-.303-.034-.446-.105-3.512-1.756-7.07-.018-7.105 0-.495.249-1.095.046-1.342-.447-.247-.494-.047-1.095.447-1.342.182-.09 4.498-2.197 8.895 0 .494.247.694.848.447 1.342-.176.35-.529.552-.896.552zm14 0c-.15 0-.303-.034-.446-.105-3.513-1.756-7.07-.018-7.105 0-.494.248-1.094.047-1.342-.447-.247-.494-.047-1.095.447-1.342.182-.09 4.501-2.196 8.895 0 .494.247.694.848.447 1.342-.176.35-.529.552-.896.552z"
@@ -81,7 +81,7 @@
      rx="18"
      ry="2"
      id="ellipse4"
-     style="fill:#832643;fill-opacity:1" />
+     style="fill:#e9ebe5;fill-opacity:1" />
   <ellipse
      fill="#E75A70"
      cx="18"

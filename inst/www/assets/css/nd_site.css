@@ -11941,6 +11941,37 @@ img.emoji {
   border-top: 0;
 }
 
+.accordion-button-primary {
+  color: #ffffff;
+  background-color: #837591;
+  justify-content: center;
+}
+
+.accordion-button-primary::after {
+  all: initial;
+}
+
+.accordion-button-primary::before {
+  flex-shrink: 0;
+  margin-right: 0.25rem;
+  width: var(--bs-accordion-btn-icon-width);
+  height: var(--bs-accordion-btn-icon-width);
+  content: "";
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-size: var(--bs-accordion-btn-icon-width);
+  transition: var(--bs-accordion-btn-icon-transition);
+}
+
+.accordion-button-primary:not(.collapsed) {
+  color: #ffffff;
+  background-color: #837591;
+}
+
+.accordion-button-primary:not(.collapsed)::before {
+  transform: rotate(-180deg);
+}
+
 .card-header {
   background-color: var(--nd-navbar-color) !important;
 }

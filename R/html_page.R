@@ -61,27 +61,33 @@ nd_page <- function(
         name="viewport", content="width=device-width, initial-scale=1"
       ),
       tags$title("EnDiKaU: Sentimentanalyse"),
-      # JS
+      # jquery
+      tags$script(src="assets/vendor/jquery/js/jquery.min.js"),
+      # fonts
+      tags$link(href="assets/fonts/fonts.css", rel="stylesheet"),
+      # twemoj
+      tags$script(src="assets/vendor/twemoji/js/twemoji.min.js"),
+      tags$style("img.emoji{cursor:pointer;height:1em;width:1em;margin:0 .05em 0 .1em;vertical-align:-0.1em;}"),
+      tags$script("$(window).on('load',function(){twemoji.parse(document,{base:'assets/vendor/twemoji/',folder:'svg',ext:'.svg'});});"),
+      # fontawesome
+      tags$script(src="assets/vendor/fontawesome/js/all.min.js"),
+      # compiled style
+      tags$link(href="assets/css/nd_site.css", rel="stylesheet"),
+      # bootstrap js
+      tags$script(src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"),
+      # own js
       tags$script(src="assets/js/navbar_height.js"),
       tags$script(src="assets/js/toc_height.js"),
-      tags$script(src="assets/vendor/jquery/js/jquery.min.js"),
-      tags$script(src="assets/vendor/twemoji/js/twemoji.min.js"),
-      tags$script(src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"),
-      tags$script(src="assets/vendor/fontawesome/js/all.min.js"),
+      # iframe resizer
       if(.page_type == "static"){
         tags$script(src="assets/vendor/iframe-resizer/js/iframe-resizer.parent.js")
       }else if(.page_type == "app"){
         tags$script(src="assets/vendor/iframe-resizer/js/iframe-resizer.child.js")
       },
-      tags$script("window.onload = function() { twemoji.parse( document, { base: 'assets/vendor/twemoji/', folder: 'svg', ext: '.svg' } ); }"),
-      tags$style("img.emoji { cursor: pointer; height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em; }"),
+      # wordcloud2
       if(.load_wordcloud2){
         tags$script(src="assets/vendor/wordcloud2/js/wordcloud2.js")
       },
-      # CSS
-      tags$link(href="assets/fonts/fonts.css", rel="stylesheet"),
-      tags$link(href="assets/css/nd_site.css", rel="stylesheet"),
-      # htmltools::HTML('<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">')
     ),
     tags$body(
       lang="de", 
@@ -172,9 +178,7 @@ if(interactive()){
                     tags$canvas(id="wordcloud_canvas", width="700pt", height="300pt"),
                     tags$script(src="assets/js/wordclouds.js"),
                     tags$script(htmltools::HTML(
-                      "$(window).on('load resize', function() {",
-                      "  fetch('assets/data/wordcloud2_data.json').then((response) => response.json()).then((json) => { wordcloud_draw('wordcloud_canvas', json, 3); });",
-                      "} );"
+                      "$(window).on('load resize',function(){fetch('assets/data/wordcloud2_data.json').then(response=>response.json()).then(json=>{wordcloud_draw('wordcloud_canvas',json,3);});});"
                     ))
                   )
                 )
@@ -183,7 +187,7 @@ if(interactive()){
             tags$div(
               id="lexikon-vor_nachteile", class="content-sec",
               tags$h4("Vor- und Nachteile"),
-              endikau.site::format_fa_list(list(
+              htmlpers::format_fa_list(list(
                 "fa-solid fa-thumbs-up text-primary" = "Die lexikonbasierte Sentimentanalyse ist aufgrund ihrer einfachen Implementierung und des geringen Bedarfs an Rechen- und Speicherkapazität besonders für kleine Unternehmen mit begrenzten Ressourcen attraktiv.",
                 "fa-solid fa-thumbs-down text-primary" = "Allerdings stößt sie in komplexen Szenarien schnell an ihre Grenzen, da sie Schwierigkeiten hat, den Kontext und die Mehrdeutigkeit von Wörtern korrekt zu erfassen. Eine Phrase wie „nicht schlecht“ kann beispielsweise fälschlicherweise als negativ interpretiert werden, obwohl sie im Kontext positiv gemeint ist."
               )),

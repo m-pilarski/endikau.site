@@ -25,14 +25,16 @@ rlist_c <- function(
   }
   
   .x |>
-    purrr::modify_tree(post=\(..x){
-      ..x |>
-        purrr::imap(\(...v, ...n){
-          if(!vctrs::obj_is_list(...v)){...v <- .fn_leaf_names(...v, ...n)}
-          return(...v)
-        }) |>
-        unname()
-    }) |>
+    purrr::modify_tree(
+      post=\(..x){
+        ..x |>
+          purrr::imap(\(...v, ...n){
+            if(!vctrs::obj_is_list(...v)){...v <- .fn_leaf_names(...v, ...n)}
+            return(...v)
+          }) |>
+          unname()
+      }
+    ) |>
     purrr::modify_tree(
       leaf=.fn_leaf_wrap,
       post=\(..x){
@@ -46,6 +48,7 @@ rlist_c <- function(
   
 }
 
+
 #' format_fa_list
 #'
 #' @param .x a named list
@@ -54,12 +57,23 @@ rlist_c <- function(
 #' @export
 #'
 #' @examples
-#' FALSE
-format_fa_list <- function(.x, .pad_left="1.75em"){
+#' format_fa_list(list(
+#'   "fa-solid fa-minus"="Minus"
+#'   "fa-solid fa-plus"="Plus"
+#' ))
+format_fa_list <- function(.x, .bullet_col=NULL, .pad_left="1.75em"){
   htmltools::HTML(rlist_c(
-    .x,
     .fn_leaf_names=\(.x, .n){
-      stringi::stri_c("<span class='fa-li'><i class='", .n, "'></i></span>", .x)
+      if(!stringi::stri_isempty(.n)){
+        .r <- stringi::stri_c(
+          "<span class='fa-li'><i class='", .n, "'></i></span>", .x
+        )
+      }else{
+        .r <- stringi::stri_c(
+          "<span class='fa-li'>-</span>", .x
+        )
+      }
+      return(.r)
     },
     .fn_node_wrap=\(.x){
       stringi::stri_c(
@@ -69,6 +83,7 @@ format_fa_list <- function(.x, .pad_left="1.75em"){
     }
   ))
 }
+
 
 #' format_nd_toc
 #'
