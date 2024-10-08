@@ -4,7 +4,7 @@
 \alias{format_fa_list}
 \title{format_fa_list}
 \usage{
-format_fa_list(.x)
+format_fa_list(.x, .bullet_col = NULL, .pad_left = "1.75em")
 }
 \arguments{
 \item{.x}{a named list}
@@ -16,5 +16,8 @@ a HTML string
 format_fa_list
 }
 \examples{
-FALSE
+format_fa_list(list(
+  "fa-solid fa-minus"="Minus"
+  "fa-solid fa-plus"="Plus"
+))
 }

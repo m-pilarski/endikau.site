@@ -18,9 +18,12 @@ Imports:
     fs,
     glue,
     here,
+    htmlpers (>= 0.1.0),
     htmltools,
     purrr,
     rstudioapi,
     stringi,
     vctrs,
     zip
+Remotes:  
+    m-pilarski/htmlpers
