@@ -2,11 +2,11 @@
 
 export(format_fa_list)
 export(format_nd_toc)
+export(nd_iframe_app)
 export(nd_main)
 export(nd_main_sec)
 export(nd_navbar)
 export(nd_page)
 export(rlist_c)
 export(tags)
-export(word_cloud_element)
 importFrom(htmltools,tags)

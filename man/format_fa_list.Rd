@@ -8,6 +8,10 @@ format_fa_list(.x, .bullet_col = NULL, .pad_left = "1.75em")
 }
 \arguments{
 \item{.x}{a named list}
+
+\item{.bullet_col}{...}
+
+\item{.pad_left}{...}
 }
 \value{
 a HTML string
@@ -16,8 +20,5 @@ a HTML string
 format_fa_list
 }
 \examples{
-format_fa_list(list(
-  "fa-solid fa-minus"="Minus"
-  "fa-solid fa-plus"="Plus"
-))
+NULL
 }

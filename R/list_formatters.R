@@ -52,15 +52,14 @@ rlist_c <- function(
 #' format_fa_list
 #'
 #' @param .x a named list
+#' @param .bullet_col ...
+#' @param .pad_left ...
 #'
 #' @return a HTML string
 #' @export
 #'
 #' @examples
-#' format_fa_list(list(
-#'   "fa-solid fa-minus"="Minus"
-#'   "fa-solid fa-plus"="Plus"
-#' ))
+#' NULL
 format_fa_list <- function(.x, .bullet_col=NULL, .pad_left="1.75em"){
   htmltools::HTML(rlist_c(
     .fn_leaf_names=\(.x, .n){
