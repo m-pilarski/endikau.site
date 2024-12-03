@@ -23,7 +23,7 @@ nd_card <- function(.header=list(), .body=list()){
 #' @examples
 #' NULL
 nd_iframe_app <- function(.url, .width="100%", .height="400pt"){
-  .url_hash <- digest::digest(.url, algo="crc32c")
+  .url_hash <- stringi::stri_c("iframe", digest::digest(.url, algo="crc32c"))
   .nd_iframe_app <- list(
     tags$iframe(
       id=.url_hash, scrolling="no", loading="lazy",
@@ -127,11 +127,11 @@ nd_page <- function(
 #       nd_main_sec(
 #         .bg_color="#e9ebe5",
 #         tags$div(
-#           class="g-col-1 g-col-xl-3 text-end",  style="font-size: 3.75rem; font-family: serif !important;", 
+#           class="g-col-1 g-col-xl-3 text-end",  style="font-size: 3.75rem; font-family: serif !important;",
 #           emoji::emoji("thermometer")
 #         ),
 #         tags$div(
-#           class="g-col-11 g-col-xl-6", 
+#           class="g-col-11 g-col-xl-6",
 #           tags$h1("Sentimentanalyse"),
 #           tags$span(class="lead", "Automatisierte Erkennung von Stimmungen in Texten")
 #         )
@@ -162,7 +162,7 @@ nd_page <- function(
 #           )
 #         ),
 #         tags$div(
-#           class="g-col-12 g-col-xl-6 g-start-xl-4 order-xl-1", 
+#           class="g-col-12 g-col-xl-6 g-start-xl-4 order-xl-1",
 #           tags$div(
 #             class="content-sec", id="einleitung",
 #             tags$h3("TODO"),
@@ -237,7 +237,7 @@ nd_page <- function(
 #       nd_main_sec(
 #         .bg_color="#e9ebe5",
 #         tags$div(
-#           class="g-col-12", 
+#           class="g-col-12",
 #           tags$img(src="assets/img/JLU_Giessen-Logo-1.svg", width="200px"),
 #           tags$img(src="assets/img/Hessen-Logo-grau.svg", width="100px"),
 #           !!!purrr::map(stringi::stri_rand_lipsum(10), tags$p)
@@ -245,7 +245,7 @@ nd_page <- function(
 #       )
 #     )
 #   )
-#   
+# 
 #   site_dir <- fs::path_real(here::here("../endikau.shares/site"))
 #   htmltools::save_html(site_html, fs::path(site_dir, "index.html"))
 #   zip::unzip(
@@ -253,5 +253,5 @@ nd_page <- function(
 #     exdir=fs::path(site_dir, "assets")
 #   )
 #   rstudioapi::viewer("https://endikau.dsjlu.wirtschaft.uni-giessen.de/")
-#   
+# 
 # }
